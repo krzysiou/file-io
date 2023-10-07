@@ -2,13 +2,21 @@ import React from 'react';
 
 import styles from './Frontpage.module.scss';
 
-const { frontpage, header } = styles;
+const { frontpage, hero, description } = styles;
 
 const Frontpage: React.FC = () => {
   return (
     <div className={frontpage}>
-      <h1 className={header}>file-io</h1>
-      <h3>Using default layout</h3>
+      <p className={hero}>
+        Fill out your <span>paperwork with lighting fast schemas</span>
+      </p>
+      <p className={description}>
+        Frustrated filling out papers repeatedly every semester?{' '}
+        <span>
+          File-io lets you create, save and download your own paper schemas{' '}
+        </span>
+        to help you manage your paperwork.
+      </p>
     </div>
   );
 };

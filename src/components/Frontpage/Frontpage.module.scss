@@ -1,10 +1,46 @@
-.frontpage {
-  font-family: monospace;
-  margin: 20px;
-  color: #42c99c;
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
 
-  .header {
-    margin: 0;
+.frontpage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 80px 10px;
+  text-align: center;
+  color: $color-accent-dark;
+
+  .hero {
     font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+    max-width: $media-breakpoint;
+
+    @include respond-to(web) {
+      font-size: 64px;
+      max-width: 750px;
+      margin-bottom: 80px;
+    }
+   
+    > span {
+      background: -webkit-linear-gradient(0deg, $color-accent-dark, $color-action);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+  
+  .description {
+    font-size: 12px;
+    font-weight: 200;
+    max-width: $media-breakpoint;
+
+    @include respond-to(web) {
+      font-size: 18px;
+    }
+
+    > span {
+      font-weight: 600;
+      color: $color-action
+    }
   }
 }
