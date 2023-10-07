@@ -5,7 +5,7 @@ import style from './NotFound.module.scss';
 
 const { notFound, header, paragraph, goBack } = style;
 
-export const NotFound: React.FC = () => {
+const NotFound: React.FC = () => {
   return (
     <div className={notFound}>
       <h2 className={header}>404 Not Found</h2>
@@ -16,3 +16,5 @@ export const NotFound: React.FC = () => {
     </div>
   );
 };
+
+export { NotFound };

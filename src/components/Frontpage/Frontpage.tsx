@@ -4,7 +4,7 @@ import styles from './Frontpage.module.scss';
 
 const { frontpage, header } = styles;
 
-export const Frontpage: React.FC = () => {
+const Frontpage: React.FC = () => {
   return (
     <div className={frontpage}>
       <h1 className={header}>file-io</h1>
@@ -12,3 +12,5 @@ export const Frontpage: React.FC = () => {
     </div>
   );
 };
+
+export { Frontpage };

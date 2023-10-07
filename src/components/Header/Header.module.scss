@@ -1,0 +1,58 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid $color-accent-light;
+
+  @include respond-to(web) {
+    height: 75px;
+  }
+
+  img:first-of-type {
+    width: 120px;
+    height: 50px;
+
+    @include respond-to(web) {
+      width: 180px;
+      height: 75px;
+      margin-left: 30px;
+    }
+  }
+
+  .headerLinks {
+    display: none;
+
+    @include respond-to(web) {
+      display: flex;
+      width: auto;
+      margin-right: 30px;
+      gap: 64px;
+    }
+
+    .headerLink {
+      font-size: 16px;
+      font-weight: 200;
+      color: $color-main;
+      border-bottom: 2px solid $color-light;
+      text-decoration: none;
+
+      &:hover {
+        color: $color-accent-dark;
+        border-bottom: 2px solid $color-action;
+      }
+    }
+  }
+
+  img:last-of-type {
+    display: block;
+    margin-right: 15px;
+
+    @include respond-to(web) {
+      display: none;
+    }
+  }
+}

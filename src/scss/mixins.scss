@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+@mixin respond-to($device) {
+  @if $device == mobile {
+    @media screen and (max-width: calc($media-breakpoint - 1)) {
+      @content;
+    }
+  } 
+  
+  @else if $device == web {
+    @media screen and (min-width: $media-breakpoint) {
+      @content;
+    }
+  }
+}
