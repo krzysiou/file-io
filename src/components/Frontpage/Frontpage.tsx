@@ -1,8 +1,9 @@
 import React from 'react';
 
 import styles from './Frontpage.module.scss';
+import { LogoIcon } from '../Icons';
 
-const { frontpage, hero, description } = styles;
+const { frontpage, hero, description, logos, logosSlide } = styles;
 
 const Frontpage: React.FC = () => {
   return (
@@ -17,6 +18,16 @@ const Frontpage: React.FC = () => {
         </span>
         to help you manage your paperwork.
       </p>
+      <div className={logos}>
+        <div className={logosSlide}>
+          <LogoIcon />
+          <LogoIcon />
+          <LogoIcon />
+          <LogoIcon />
+          <LogoIcon />
+          <LogoIcon />
+        </div>
+      </div>
     </div>
   );
 };
