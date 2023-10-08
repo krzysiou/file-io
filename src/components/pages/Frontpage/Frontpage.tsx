@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Frontpage.module.scss';
-import { LogoIcon } from '../Icons';
+import { LogoIcon } from '../../shared/Icons';
 
 const { frontpage, hero, description, logos, logosSlide } = styles;
 

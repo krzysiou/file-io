@@ -1,0 +1,11 @@
+@import '../../../../public/scss/mixins.scss';
+@import '../../../../public/scss/variables.scss';
+
+.login {
+  padding: $padding-header-mobile;
+  color: blue;
+
+  @include respond-to(web) {
+    padding: $padding-header-web;
+  }
+}

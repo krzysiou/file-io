@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Header } from '../src/components/Header/Header';
-import { Footer } from '../src/components/Footer/Footer';
+import { Header } from '../src/components/shared/Header/Header';
+import { Footer } from '../src/components/shared/Footer/Footer';
 
-import '../src/scss/globals.scss';
+import '../public/scss/globals.scss';
 
 export default function RootLayout({
   children,

@@ -1,0 +1,69 @@
+@import '../../../../public/scss/mixins.scss';
+@import '../../../../public/scss/variables.scss';
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-header-mobile;
+
+  @include respond-to(web) {
+    padding: $padding-header-web;
+  }
+
+  .hero {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    max-width: $media-breakpoint;
+
+    @include respond-to(web) {
+      font-size: 64px;
+      line-height: 64px;
+      max-width: 750px;
+      margin-bottom: 40px;
+    }
+
+    > span {
+      background: -webkit-linear-gradient(
+        0deg,
+        $color-accent-dark,
+        $color-action
+      );
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 200;
+    max-width: $media-breakpoint;
+
+    @include respond-to(web) {
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    > span {
+      font-weight: 600;
+      color: $color-action;
+    }
+  }
+
+  .link {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-action;
+    border-bottom: 2px solid $color-light;
+    text-decoration: none;
+
+    &:hover {
+      border-bottom: 2px solid $color-action;
+    }
+  }
+}

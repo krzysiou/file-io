@@ -1,17 +1,17 @@
-@import '../../scss/mixins.scss';
-@import '../../scss/variables.scss';
+@import '../../../../public/scss/mixins.scss';
+@import '../../../../public/scss/variables.scss';
 
 .frontpage {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  padding: 80px 0 0;
+  padding: $padding-header-mobile;
   text-align: center;
   color: $color-accent-dark;
 
   @include respond-to(web) {
-    padding: 120px 0 0;
+    padding: $padding-header-web;
   }
 
   .hero {
