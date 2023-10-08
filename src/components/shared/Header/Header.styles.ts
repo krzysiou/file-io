@@ -5,7 +5,11 @@ import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 
 const { colors } = styleVariables;
 
-const HeaderStyled = styled.div`
+type HeaderStyledProps = {
+  open: boolean;
+};
+
+const HeaderStyled = styled.div<HeaderStyledProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -57,12 +61,18 @@ const HeaderStyled = styled.div`
     }
   }
 
-  img:last-of-type {
+  button:last-of-type {
     display: block;
-    margin-right: 15px;
+    border: none;
+    background-color: transparent;
 
     ${mediaQuery['web']} {
       display: none;
+    }
+
+    > img {
+      width: 50px;
+      rotate: ${(props) => (props.open ? '90deg' : '0deg')};
     }
   }
 `;
