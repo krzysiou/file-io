@@ -1,7 +1,11 @@
-@import '../../../../public/scss/mixins.scss';
-@import '../../../../public/scss/variables.scss';
+import { styled } from 'styled-components';
 
-.header {
+import { styleVariables } from '../../../../public/styles/utils/styleVariables';
+import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
+
+const { colors } = styleVariables;
+
+const HeaderStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,10 +14,10 @@
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  background-color: $color-light;
-  border-bottom: 1px solid $color-accent-light;
+  background-color: ${colors.light};
+  border-bottom: 1px solid ${colors.accentLight};
 
-  @include respond-to(web) {
+  ${mediaQuery['web']} {
     height: 75px;
   }
 
@@ -21,7 +25,7 @@
     width: 120px;
     height: 50px;
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       width: 180px;
       height: 75px;
       margin-left: 30px;
@@ -31,7 +35,7 @@
   .headerLinks {
     display: none;
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       display: flex;
       width: auto;
       margin-right: 30px;
@@ -41,13 +45,13 @@
     .headerLink {
       font-size: 16px;
       font-weight: 200;
-      color: $color-main;
-      border-bottom: 2px solid $color-light;
+      color: ${colors.main};
+      border-bottom: 2px solid ${colors.light};
       text-decoration: none;
 
       &:hover {
-        color: $color-accent-dark;
-        border-bottom: 2px solid $color-action;
+        color: ${colors.accentDark};
+        border-bottom: 2px solid ${colors.action};
       }
     }
   }
@@ -56,8 +60,10 @@
     display: block;
     margin-right: 15px;
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       display: none;
     }
   }
-}
+`;
+
+export { HeaderStyled };

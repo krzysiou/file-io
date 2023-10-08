@@ -1,7 +1,11 @@
-@import '../../../../public/scss/mixins.scss';
-@import '../../../../public/scss/variables.scss';
+import { styled } from 'styled-components';
 
-.footer {
+import { styleVariables } from '../../../../public/styles/utils/styleVariables';
+import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
+
+const { colors } = styleVariables;
+
+const FooterStyled = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -12,17 +16,17 @@
   justify-content: space-around;
   font-size: 12px;
   height: 45px;
-  background-color: $color-light;
-  border-top: 1px solid $color-accent-light;
+  background-color: ${colors.light};
+  border-top: 1px solid ${colors.accentLight};
 
-  @include respond-to(web) {
+  ${mediaQuery['web']} {
     height: 60px;
     font-size: 16px;
   }
 
   .info {
     a {
-      color: $color-action;
+      color: ${colors.action};
       text-decoration: none;
 
       &:hover {
@@ -42,4 +46,6 @@
       margin: 0 15px;
     }
   }
-}
+`;
+
+export { FooterStyled };

@@ -1,28 +1,28 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 
 import { LogoIcon, MenuIcon } from '../Icons';
-import styles from './Header.module.scss';
-
-const { header, headerLinks, headerLink } = styles;
+import { HeaderStyled } from './Header.styles';
 
 const Header: React.FC = () => {
   return (
-    <div className={header}>
+    <HeaderStyled>
       <LogoIcon />
       <MenuIcon />
-      <div className={headerLinks}>
-        <Link href="/" className={headerLink}>
+      <div className="headerLinks">
+        <Link href="/" className="headerLink">
           Home
         </Link>
-        <Link href="/schemas" className={headerLink}>
+        <Link href="/schemas" className="headerLink">
           Schemas
         </Link>
-        <Link href="/login" className={headerLink}>
+        <Link href="/login" className="headerLink">
           Sign in
         </Link>
       </div>
-    </div>
+    </HeaderStyled>
   );
 };
 

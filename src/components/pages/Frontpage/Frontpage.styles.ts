@@ -1,17 +1,21 @@
-@import '../../../../public/scss/mixins.scss';
-@import '../../../../public/scss/variables.scss';
+import { styled } from 'styled-components';
 
-.frontpage {
+import { styleVariables } from '../../../../public/styles/utils/styleVariables';
+import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
+
+const { colors, paddings, mediaBreakpoint } = styleVariables;
+
+const FrontpageStyled = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  padding: $padding-header-mobile;
+  padding: ${paddings.mobile};
   text-align: center;
-  color: $color-accent-dark;
+  color: ${colors.accentDark};
 
-  @include respond-to(web) {
-    padding: $padding-header-web;
+  ${mediaQuery['web']} {
+    padding: ${paddings.web};
   }
 
   .hero {
@@ -19,9 +23,9 @@
     line-height: 32px;
     font-weight: 900;
     margin-bottom: 40px;
-    max-width: $media-breakpoint;
+    max-width: ${mediaBreakpoint};
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       font-size: 64px;
       line-height: 64px;
       max-width: 750px;
@@ -31,10 +35,11 @@
     > span {
       background: -webkit-linear-gradient(
         0deg,
-        $color-accent-dark,
-        $color-action
+        ${colors.accentDark},
+        ${colors.action}
       );
       background-clip: text;
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   }
@@ -43,16 +48,16 @@
     font-size: 12px;
     line-height: 12px;
     font-weight: 200;
-    max-width: $media-breakpoint;
+    max-width: ${mediaBreakpoint};
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       font-size: 18px;
       line-height: 20px;
     }
 
     > span {
       font-weight: 600;
-      color: $color-action;
+      color: ${colors.action};
     }
   }
 
@@ -65,7 +70,7 @@
     white-space: nowrap;
     z-index: -2;
 
-    @include respond-to(web) {
+    ${mediaQuery['web']} {
       padding: 60px 0;
     }
   }
@@ -113,4 +118,6 @@
       left: calc(100%);
     }
   }
-}
+`;
+
+export { FrontpageStyled };

@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { StyledComponentsRegistry } from './lib/registry';
 import { Header } from '../src/components/shared/Header/Header';
 import { Footer } from '../src/components/shared/Footer/Footer';
-
-import '../public/scss/globals.scss';
+import { Reset } from '../public/styles/Reset.styles';
+import { Globals } from '../public/styles/Globals.styles';
 
 export default function RootLayout({
   children,
@@ -12,11 +13,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <StyledComponentsRegistry>
+        <Reset />
+        <Globals />
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </StyledComponentsRegistry>
     </html>
   );
 }

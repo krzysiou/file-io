@@ -25,12 +25,14 @@
   "dependencies": {
     "@schibsted/data-controller": "^3.6.0",
     "axios": "^1.4.0",
+    "babel-plugin-styled-components": "^2.1.4",
     "dotenv": "^16.3.1",
     "next": "^13.4.12",
     "node": "^20.5.0",
     "nodesi": "^1.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.64.1"
+    "sass": "^1.64.1",
+    "styled-components": "^6.0.8"
   }
 }
