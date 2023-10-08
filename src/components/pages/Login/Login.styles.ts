@@ -1,16 +1,24 @@
 import { styled } from 'styled-components';
 
+import type { LoginErrors } from './Login';
+
 import { styleVariables } from '../../../../public/styles/utils/styleVariables';
 import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 
 const { colors, paddings, mediaBreakpoint } = styleVariables;
 
-const LoginStyled = styled.form`
+type LoginStyledProps = {
+  errors: LoginErrors;
+};
+
+const LoginStyled = styled.div<LoginStyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: ${paddings.mobile};
+  width: 250px;
+  margin: 0 auto;
 
   ${mediaQuery['web']} {
     padding: ${paddings.web};
@@ -42,26 +50,98 @@ const LoginStyled = styled.form`
     }
   }
 
-  .description {
+  form {
+    width: 100%;
+  }
+
+  .label {
+    width: 100%;
+    text-align: left;
+    margin: 10px 0 0;
+  }
+
+  .label ~ .label {
+    margin: 30px 0 0;
+  }
+
+  .clear {
+    color: ${colors.accentDark};
+    cursor: pointer;
+  }
+
+  .error {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
     font-size: 12px;
-    line-height: 12px;
-    font-weight: 200;
-    margin: 5px 0;
-    max-width: ${mediaBreakpoint};
+    color: ${colors.error};
+    margin: 10px 0;
+  }
 
-    ${mediaQuery['web']} {
-      font-size: 18px;
-      line-height: 20px;
-    }
+  .input-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    border: none;
+    margin: 5px 0 5px;
+    padding: 5px 10px;
+    background-color: ${colors.accentLighter};
+    border-radius: 5px;
 
-    > span {
-      font-weight: 600;
-      color: ${colors.action};
+    .form-input {
+      width: calc(100% - 20px);
+      border: none;
+      background-color: transparent;
+      color: ${colors.accentDark};
+
+      &:focus {
+        outline-width: 0;
+      }
     }
   }
 
-  .formInput {
-    margin: 10px 0;
+  .input-username {
+    border: ${(props) =>
+      props.errors?.username
+        ? `1px solid ${colors.error}`
+        : `1px solid ${colors.accentLighter}`};
+  }
+
+  .input-password {
+    border: ${(props) =>
+      props.errors?.password
+        ? `1px solid ${colors.error}`
+        : `1px solid ${colors.accentLighter}`};
+  }
+
+  .submit-button {
+    width: 100px;
+    margin: 30px 0 20px;
+    padding: 10px 20px;
+    background-color: ${colors.action};
+    border: none;
+    border-radius: 20px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: ${colors.accentDark};
+      color: ${colors.light};
+    }
+  }
+
+  .redirect {
+    text-decoration: none;
+    color: ${colors.accentDark};
+
+    > span {
+      color: ${colors.action};
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 `;
 

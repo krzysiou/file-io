@@ -48,6 +48,7 @@ const HeaderStyled = styled.div`
       color: ${colors.main};
       border-bottom: 2px solid ${colors.light};
       text-decoration: none;
+      transition: 0.2s;
 
       &:hover {
         color: ${colors.accentDark};
