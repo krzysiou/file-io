@@ -2,10 +2,15 @@
 @import '../../scss/variables.scss';
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 60px;
+  background-color: $color-light;
   border-bottom: 1px solid $color-accent-light;
 
   @include respond-to(web) {

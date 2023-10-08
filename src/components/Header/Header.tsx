@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Logo, MenuIcon } from '../Icons';
+import { LogoIcon, MenuIcon } from '../Icons';
 import styles from './Header.module.scss';
 
 const { header, headerLinks, headerLink } = styles;
@@ -9,7 +9,7 @@ const { header, headerLinks, headerLink } = styles;
 const Header: React.FC = () => {
   return (
     <div className={header}>
-      <Logo />
+      <LogoIcon />
       <MenuIcon />
       <div className={headerLinks}>
         <Link href="/" className={headerLink}>

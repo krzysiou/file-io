@@ -1,2 +1,4 @@
-export * from './Logo';
+export * from './LogoIcon';
 export * from './MenuIcon';
+export * from './GitHubIcon';
+export * from './LinkedInIcon';

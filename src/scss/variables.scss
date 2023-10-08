@@ -1,9 +1,21 @@
+// fonts
+$font-family:
+  Brandon Text,
+  BlinkMacSystemFont,
+  Segoe UI,
+  Roboto,
+  Oxygen-Sans,
+  Ubuntu,
+  Cantarell,
+  Helvetica Neue,
+  sans-serif !default;
+
 // colors
-$color-main: #4F5D75 !default;
-$color-accent-dark: #2D3142 !default;
-$color-accent-light: #BFC0C0 !default;
-$color-light: #FFFFFF !default;
-$color-action: #47B4E7 !default;
+$color-main: #4f5d75 !default;
+$color-accent-dark: #2d3142 !default;
+$color-accent-light: #bfc0c0 !default;
+$color-light: #ffffff !default;
+$color-action: #ef8354 !default;
 
 // breakpoints
 $media-breakpoint: 641px !default;

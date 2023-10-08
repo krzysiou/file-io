@@ -1,7 +1,9 @@
 import React from 'react';
 
-import './globals.scss';
 import { Header } from '../src/components/Header/Header';
+import { Footer } from '../src/components/Footer/Footer';
+
+import '../src/scss/globals.scss';
 
 export default function RootLayout({
   children,
@@ -13,6 +15,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

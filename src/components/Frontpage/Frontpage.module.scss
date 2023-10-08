@@ -6,41 +6,53 @@
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  margin: 80px 10px;
+  margin: 80px 10px 0;
   text-align: center;
   color: $color-accent-dark;
 
+  @include respond-to(web) {
+    margin: 120px 10px 0;
+  }
+
   .hero {
     font-size: 32px;
+    line-height: 32px;
     font-weight: 900;
     margin-bottom: 40px;
     max-width: $media-breakpoint;
 
     @include respond-to(web) {
       font-size: 64px;
+      line-height: 64px;
       max-width: 750px;
       margin-bottom: 80px;
     }
-   
+
     > span {
-      background: -webkit-linear-gradient(0deg, $color-accent-dark, $color-action);
+      background: -webkit-linear-gradient(
+        0deg,
+        $color-accent-dark,
+        $color-action
+      );
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   }
-  
+
   .description {
     font-size: 12px;
+    line-height: 12px;
     font-weight: 200;
     max-width: $media-breakpoint;
 
     @include respond-to(web) {
       font-size: 18px;
+      line-height: 20px;
     }
 
     > span {
       font-weight: 600;
-      color: $color-action
+      color: $color-action;
     }
   }
 }
