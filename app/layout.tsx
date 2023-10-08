@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledComponentsRegistry } from './lib/registry';
+import { StyledComponentsRegistry } from './registry';
 import { Header } from '../src/components/shared/Header/Header';
 import { Footer } from '../src/components/shared/Footer/Footer';
 import { Reset } from '../public/styles/Reset.styles';
