@@ -31,6 +31,7 @@ const Register: React.FC = () => {
       });
 
       console.log(response.data.accessToken);
+      setErrors(null);
     } catch (error) {
       setErrors(error.response.data);
       setPassword('');
