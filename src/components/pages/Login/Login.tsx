@@ -2,8 +2,12 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 
 import { LoginStyled } from './Login.styles';
+import { config } from '../../../config/config';
+
+const { apiUrl } = config;
 
 type ErrorObject = {
   message: string;
@@ -13,23 +17,25 @@ type LoginErrors = {
   username: ErrorObject;
   password: ErrorObject;
 };
+
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<LoginErrors>();
   const ref = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = useCallback(() => {
-    const customErrors = {
-      username: { message: 'Wrong email' },
-      password: { message: 'Wrong password' },
-    };
+  const handleSubmit = useCallback(async () => {
+    try {
+      const response = await axios.post(`${apiUrl}/admin/login`, {
+        username,
+        password,
+      });
 
-    // send request with username and password
-    console.log(username, password);
-    setErrors(customErrors);
-    setUsername('');
-    setPassword('');
+      console.log(response.data.accessToken);
+    } catch (error) {
+      setErrors(error.response.data);
+      setPassword('');
+    }
   }, [password, username]);
 
   useEffect(() => {
