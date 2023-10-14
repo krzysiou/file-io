@@ -3,8 +3,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import { LoginStyled } from './Register.styles';
+import type { Session } from '../../../hooks/use-session';
+
+import { useSession } from '../../../hooks/use-session';
+import { RegisterStyled } from './Register.styles';
 import { config } from '../../../config/config';
 
 const { apiUrl } = config;
@@ -23,20 +27,24 @@ const Register: React.FC = () => {
   const [errors, setErrors] = useState<RegisterErrors>();
   const ref = useRef<HTMLFormElement>(null);
 
+  const { push } = useRouter();
+  const { login } = useSession();
+
   const handleSubmit = useCallback(async () => {
     try {
-      const response = await axios.post(`${apiUrl}/admin/register`, {
+      const { data } = await axios.post<Session>(`${apiUrl}/admin/register`, {
         username,
         password,
       });
 
-      console.log(response.data.accessToken);
       setErrors(null);
+      login(data);
+      push('/user');
     } catch (error) {
-      setErrors(error.response.data);
+      setErrors(error.response?.data);
       setPassword('');
     }
-  }, [password, username]);
+  }, [login, password, push, username]);
 
   useEffect(() => {
     const handleKeyboardInput = (event: KeyboardEvent) => {
@@ -83,7 +91,7 @@ const Register: React.FC = () => {
   ) : null;
 
   return (
-    <LoginStyled errors={errors}>
+    <RegisterStyled errors={errors}>
       <p className="hero">
         <span>Sign up</span>
       </p>
@@ -121,7 +129,7 @@ const Register: React.FC = () => {
       <Link href="/login" className="redirect">
         Already have an account? <span>Sign in</span>
       </Link>
-    </LoginStyled>
+    </RegisterStyled>
   );
 };
 

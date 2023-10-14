@@ -3,7 +3,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
+import type { Session } from '../../../hooks/use-session';
+
+import { useSession } from '../../../hooks/use-session';
 import { LoginStyled } from './Login.styles';
 import { config } from '../../../config/config';
 
@@ -21,23 +25,26 @@ type LoginErrors = {
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errors, setErrors] = useState<LoginErrors>();
+  const [errors, setErrors] = useState<LoginErrors>(null);
   const ref = useRef<HTMLFormElement>(null);
+
+  const { push } = useRouter();
+  const { login } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {
-      const response = await axios.post(`${apiUrl}/admin/login`, {
+      const { data } = await axios.post<Session>(`${apiUrl}/admin/login`, {
         username,
         password,
       });
 
-      console.log(response.data.accessToken);
-      setErrors(null);
+      login(data);
+      push('/user');
     } catch (error) {
-      setErrors(error.response.data);
+      setErrors(error.response?.data);
       setPassword('');
     }
-  }, [password, username]);
+  }, [login, password, push, username]);
 
   useEffect(() => {
     const handleKeyboardInput = (event: KeyboardEvent) => {
@@ -57,11 +64,17 @@ const Login: React.FC = () => {
     };
   }, [handleSubmit]);
 
-  const handleUsernameChange = (event) => setUsername(event.target.value);
-  const handlePasswordChange = (event) => setPassword(event.target.value);
+  const handleUsernameChange = useCallback(
+    (event) => setUsername(event.target.value),
+    []
+  );
+  const handlePasswordChange = useCallback(
+    (event) => setPassword(event.target.value),
+    []
+  );
 
-  const clearUsername = () => setUsername('');
-  const clearPassword = () => setPassword('');
+  const clearUsername = useCallback(() => setUsername(''), []);
+  const clearPassword = useCallback(() => setPassword(''), []);
 
   const usernameClear = username ? (
     <p className="clear" onClick={clearUsername}>
@@ -88,7 +101,6 @@ const Login: React.FC = () => {
       <p className="hero">
         <span>Sign in</span>
       </p>
-
       <form ref={ref}>
         <p className="label">Username</p>
         <div className="input-frame input-username">

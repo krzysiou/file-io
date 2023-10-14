@@ -26,6 +26,7 @@
     "axios": "^1.5.1",
     "babel-plugin-styled-components": "^2.1.4",
     "dotenv": "^16.3.1",
+    "js-cookie": "^3.0.5",
     "next": "^13.4.12",
     "node": "^20.5.0",
     "nodesi": "^1.17.0",
@@ -33,5 +34,8 @@
     "react-dom": "^18.2.0",
     "sass": "^1.64.1",
     "styled-components": "^6.0.8"
+  },
+  "engines": {
+    "node": ">=10.6.0"
   }
 }

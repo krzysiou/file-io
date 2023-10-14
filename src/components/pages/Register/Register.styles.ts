@@ -7,11 +7,11 @@ import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 
 const { colors, paddings, mediaBreakpoint } = styleVariables;
 
-type LoginStyledProps = {
+type RegisterStyledProps = {
   errors: RegisterErrors;
 };
 
-const LoginStyled = styled.div<LoginStyledProps>`
+const RegisterStyled = styled.div<RegisterStyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,4 +145,4 @@ const LoginStyled = styled.div<LoginStyledProps>`
   }
 `;
 
-export { LoginStyled };
+export { RegisterStyled };
