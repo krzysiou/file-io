@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import type { Session } from '../../../hooks/use-session';
+
 import { ProfileStyled } from './Profile.styles';
 import { useSession } from '../../../hooks/use-session';
 
@@ -11,14 +13,20 @@ const mockUserData = {
   ],
 };
 
+const getMockUser = (session: Session) => ({
+  ...session,
+  files: mockUserData.files,
+});
+
 const Profile: React.FC = () => {
   const { session } = useSession();
+  const mockSession = getMockUser(session);
 
   return (
     <ProfileStyled>
-      <p>username : {session?.username}</p>
-      <p>Hi from user {session?.accessToken}</p>
-      {mockUserData.files[0].id}
+      <p>username : {mockSession?.username}</p>
+      <p>Hi from user {mockSession?.accessToken}</p>
+      {mockSession.files[0].id}
     </ProfileStyled>
   );
 };

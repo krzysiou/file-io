@@ -16,11 +16,14 @@ const Dropdown: React.FC<DropdownProps> = ({ open, trigger, menu }) => {
       {trigger}
       {open ? (
         <ul className="menu">
-          {menu.map((menuItem, index) => (
-            <li key={index} className="menu-item">
-              {menuItem}
-            </li>
-          ))}
+          {menu.map(
+            (menuItem, index) =>
+              menuItem && (
+                <li key={index} className="menu-item">
+                  {menuItem}
+                </li>
+              )
+          )}
         </ul>
       ) : null}
     </DropdownStyled>

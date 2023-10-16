@@ -11,7 +11,7 @@ import { useSession } from '../../../hooks/use-session';
 const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { hasSession } = useSession();
+  const { hasSession, logout } = useSession();
 
   const handleOpen = () => setOpen(!open);
   const closeMenu = () => setOpen(false);
@@ -44,18 +44,25 @@ const Header: React.FC = () => {
     </Link>
   );
 
+  const logoutLink = hasSession && (
+    <Link href="#" className="headerLink" onClick={logout}>
+      Sign out
+    </Link>
+  );
+
   return (
     <HeaderStyled open={open}>
       <LogoIcon />
       <Dropdown
         open={open}
         trigger={dropdownTrigger}
-        menu={[homeLink, schemasLink, loginOrProfileLink]}
+        menu={[homeLink, schemasLink, loginOrProfileLink, logoutLink]}
       />
       <div className="headerLinks">
         {homeLink}
         {schemasLink}
         {loginOrProfileLink}
+        {logoutLink}
       </div>
     </HeaderStyled>
   );

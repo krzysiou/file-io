@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useSession } from '../../../hooks/use-session';
 import { LoginStyled } from './Login.styles';
@@ -22,18 +21,16 @@ const Login: React.FC = () => {
   const [errors, setErrors] = useState<LoginErrors>(null);
   const ref = useRef<HTMLFormElement>(null);
 
-  const { push } = useRouter();
   const { login } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {
       await login(username, password);
-      push('/profile');
     } catch (error) {
       setErrors(error.response?.data);
       setPassword('');
     }
-  }, [login, password, push, username]);
+  }, [login, password, username]);
 
   useEffect(() => {
     const handleKeyboardInput = (event: KeyboardEvent) => {

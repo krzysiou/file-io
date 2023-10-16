@@ -33,6 +33,7 @@ const middleware = (request: NextRequest) => {
   if (isOpenPath && sessionCookie) {
     return NextResponse.redirect(redirectToUser);
   }
+
   if (!isOpenPath && now > session.expire) {
     const response = NextResponse.redirect(redirectToLogin);
 

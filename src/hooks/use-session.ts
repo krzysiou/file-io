@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 
 import { config } from '../config/config';
@@ -32,6 +32,7 @@ const useSession = () => {
   const [session, setSession] = useState<Session>(null);
   const [hasSession, setHasSession] = useState<boolean>(false);
 
+  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -54,9 +55,11 @@ const useSession = () => {
       password,
     });
 
-    Cookies.set(COOKIE_NAME, JSON.stringify(data), {
+    await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
       expires: EXPIRE_DAYS,
     });
+
+    router.push('/profile');
   }, []);
 
   const login = useCallback(async (username: string, password: string) => {
@@ -65,13 +68,16 @@ const useSession = () => {
       password,
     });
 
-    Cookies.set(COOKIE_NAME, JSON.stringify(data), {
+    await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
       expires: EXPIRE_DAYS,
     });
+
+    router.push('/profile');
   }, []);
 
-  const logout = useCallback(() => {
-    Cookies.remove(COOKIE_NAME);
+  const logout = useCallback(async () => {
+    await Cookies.remove(COOKIE_NAME);
+    router.push('/login');
   }, []);
 
   return {
