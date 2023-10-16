@@ -2,17 +2,10 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
-import type { Session } from '../../../hooks/use-session';
 
 import { useSession } from '../../../hooks/use-session';
 import { RegisterStyled } from './Register.styles';
-import { config } from '../../../config/config';
-
-const { apiUrl } = config;
-
 type ErrorObject = {
   message: string;
 };
@@ -28,23 +21,17 @@ const Register: React.FC = () => {
   const ref = useRef<HTMLFormElement>(null);
 
   const { push } = useRouter();
-  const { login } = useSession();
+  const { register } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {
-      const { data } = await axios.post<Session>(`${apiUrl}/admin/register`, {
-        username,
-        password,
-      });
-
-      setErrors(null);
-      login(data);
+      await register(username, password);
       push('/user');
     } catch (error) {
       setErrors(error.response?.data);
       setPassword('');
     }
-  }, [login, password, push, username]);
+  }, [register, password, push, username]);
 
   useEffect(() => {
     const handleKeyboardInput = (event: KeyboardEvent) => {

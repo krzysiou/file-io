@@ -10,6 +10,7 @@ const User: React.FC = () => {
 
   return (
     <UserStyled>
+      <p>username : {session?.username}</p>
       <p>Hi from user {session?.accessToken}</p>
     </UserStyled>
   );

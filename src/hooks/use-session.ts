@@ -3,6 +3,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { usePathname } from 'next/navigation';
+import axios from 'axios';
+
+import { config } from '../config/config';
+
+const { apiUrl } = config;
 
 const COOKIE_NAME = 'session';
 const EXPIRE_DAYS = 7;
@@ -33,8 +38,24 @@ const useSession = () => {
     setSession(null);
   }, [pathname]);
 
-  const login = useCallback((currentSession: Session) => {
-    Cookies.set(COOKIE_NAME, JSON.stringify(currentSession), {
+  const register = useCallback(async (username: string, password: string) => {
+    const { data } = await axios.post<Session>(`${apiUrl}/admin/register`, {
+      username,
+      password,
+    });
+
+    Cookies.set(COOKIE_NAME, JSON.stringify(data), {
+      expires: EXPIRE_DAYS,
+    });
+  }, []);
+
+  const login = useCallback(async (username: string, password: string) => {
+    const { data } = await axios.post<Session>(`${apiUrl}/admin/login`, {
+      username,
+      password,
+    });
+
+    Cookies.set(COOKIE_NAME, JSON.stringify(data), {
       expires: EXPIRE_DAYS,
     });
   }, []);
@@ -46,6 +67,7 @@ const useSession = () => {
   return {
     session,
     hasSession,
+    register,
     login,
     logout,
   };

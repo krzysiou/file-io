@@ -2,16 +2,10 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-
-import type { Session } from '../../../hooks/use-session';
 
 import { useSession } from '../../../hooks/use-session';
 import { LoginStyled } from './Login.styles';
-import { config } from '../../../config/config';
-
-const { apiUrl } = config;
 
 type ErrorObject = {
   message: string;
@@ -33,12 +27,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = useCallback(async () => {
     try {
-      const { data } = await axios.post<Session>(`${apiUrl}/admin/login`, {
-        username,
-        password,
-      });
-
-      login(data);
+      await login(username, password);
       push('/user');
     } catch (error) {
       setErrors(error.response?.data);
@@ -64,17 +53,11 @@ const Login: React.FC = () => {
     };
   }, [handleSubmit]);
 
-  const handleUsernameChange = useCallback(
-    (event) => setUsername(event.target.value),
-    []
-  );
-  const handlePasswordChange = useCallback(
-    (event) => setPassword(event.target.value),
-    []
-  );
+  const handleUsernameChange = (event) => setUsername(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
-  const clearUsername = useCallback(() => setUsername(''), []);
-  const clearPassword = useCallback(() => setPassword(''), []);
+  const clearUsername = () => setUsername('');
+  const clearPassword = () => setPassword('');
 
   const usernameClear = username ? (
     <p className="clear" onClick={clearUsername}>
