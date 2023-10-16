@@ -35,7 +35,7 @@ const Header: React.FC = () => {
   );
 
   const loginOrProfileLink = hasSession ? (
-    <Link href="/user" className="headerLink" onClick={closeMenu}>
+    <Link href="/profile" className="headerLink" onClick={closeMenu}>
       Profile
     </Link>
   ) : (

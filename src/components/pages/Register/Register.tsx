@@ -26,7 +26,7 @@ const Register: React.FC = () => {
   const handleSubmit = useCallback(async () => {
     try {
       await register(username, password);
-      push('/user');
+      push('/profile');
     } catch (error) {
       setErrors(error.response?.data);
       setPassword('');

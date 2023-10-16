@@ -28,7 +28,7 @@ const Login: React.FC = () => {
   const handleSubmit = useCallback(async () => {
     try {
       await login(username, password);
-      push('/user');
+      push('/profile');
     } catch (error) {
       setErrors(error.response?.data);
       setPassword('');

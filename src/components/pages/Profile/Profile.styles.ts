@@ -1,8 +1,8 @@
 import { styled } from 'styled-components';
 
-const UserStyled = styled.div`
+const ProfileStyled = styled.div`
   margin-top: 100px;
   color: blue;
 `;
 
-export { UserStyled };
+export { ProfileStyled };

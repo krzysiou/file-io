@@ -12,8 +12,18 @@ const { apiUrl } = config;
 const COOKIE_NAME = 'session';
 const EXPIRE_DAYS = 7;
 
+type FileType = 'spz';
+
+type File = {
+  id: string;
+  type: FileType;
+  name: string;
+  date: number;
+};
+
 type Session = {
   username: string;
+  files: File[];
   accessToken: string;
   expire: number;
 };

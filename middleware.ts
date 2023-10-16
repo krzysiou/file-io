@@ -8,7 +8,7 @@ import { COOKIE_NAME } from './src/hooks/use-session';
 const forwardRoutes = ['/login', '/register'];
 
 export const config = {
-  matcher: ['/login', '/register', '/user/:path*'],
+  matcher: ['/login', '/register', '/profile/:path*'],
 };
 
 const middleware = (request: NextRequest) => {
@@ -16,7 +16,7 @@ const middleware = (request: NextRequest) => {
   const sessionCookie = request.cookies.get(COOKIE_NAME)?.value;
 
   const redirectToLogin = new URL('/login', request.url);
-  const redirectToUser = new URL('/user', request.url);
+  const redirectToUser = new URL('/profile', request.url);
 
   const now = Date.now();
 
