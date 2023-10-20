@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { LogoIcon, MenuIcon } from '../Icons';
 import { HeaderStyled } from './Header.styles';
@@ -11,10 +12,16 @@ import { useSession } from '../../../hooks/use-session';
 const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
+  const router = useRouter();
   const { hasSession, logout } = useSession();
 
   const handleOpen = () => setOpen(!open);
   const closeMenu = () => setOpen(false);
+
+  const handleSignOutClick = () => {
+    logout();
+    router.push('/login');
+  };
 
   const dropdownTrigger = (
     <button onClick={handleOpen}>
@@ -45,9 +52,9 @@ const Header: React.FC = () => {
   );
 
   const logoutLink = hasSession && (
-    <Link href="#" className="headerLink" onClick={logout}>
+    <a className="headerLink" onClick={handleSignOutClick}>
       Sign out
-    </Link>
+    </a>
   );
 
   return (

@@ -49,36 +49,42 @@ const useSession = () => {
     setSession(null);
   }, [pathname]);
 
-  const register = useCallback(async (username: string, password: string) => {
-    const { data } = await axios.post<Session>(`${apiUrl}/admin/register`, {
-      username,
-      password,
-    });
+  const register = useCallback(
+    async (username: string, password: string) => {
+      const { data } = await axios.post<Session>(`${apiUrl}/admin/register`, {
+        username,
+        password,
+      });
 
-    await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
-      expires: EXPIRE_DAYS,
-    });
+      await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
+        expires: EXPIRE_DAYS,
+      });
 
-    router.push('/profile');
-  }, []);
+      router.push('/profile');
+    },
+    [router]
+  );
 
-  const login = useCallback(async (username: string, password: string) => {
-    const { data } = await axios.post<Session>(`${apiUrl}/admin/login`, {
-      username,
-      password,
-    });
+  const login = useCallback(
+    async (username: string, password: string) => {
+      const { data } = await axios.post<Session>(`${apiUrl}/admin/login`, {
+        username,
+        password,
+      });
 
-    await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
-      expires: EXPIRE_DAYS,
-    });
+      await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
+        expires: EXPIRE_DAYS,
+      });
 
-    router.push('/profile');
-  }, []);
+      router.push('/profile');
+    },
+    [router]
+  );
 
   const logout = useCallback(async () => {
     await Cookies.remove(COOKIE_NAME);
     router.push('/login');
-  }, []);
+  }, [router]);
 
   return {
     session,

@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useSession } from '../../../hooks/use-session';
 import { RegisterStyled } from './Register.styles';
@@ -19,7 +20,8 @@ const Register: React.FC = () => {
   const [errors, setErrors] = useState<RegisterErrors>();
   const ref = useRef<HTMLFormElement>(null);
 
-  const { register } = useSession();
+  const router = useRouter();
+  const { register, hasSession } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {
@@ -41,12 +43,18 @@ const Register: React.FC = () => {
       }
     };
 
+    if (hasSession) {
+      router.push('/profile');
+
+      return;
+    }
+
     document.addEventListener('keydown', handleKeyboardInput);
 
     return () => {
       document.removeEventListener('keydown', handleKeyboardInput);
     };
-  }, [handleSubmit]);
+  }, [handleSubmit, hasSession, router]);
 
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
