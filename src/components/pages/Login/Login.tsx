@@ -2,35 +2,30 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
+import type { Config } from '../../../../config/types';
+import type { AuthErrorObject } from '../../types';
 
 import { useSession } from '../../../hooks/use-session';
 import { LoginStyled } from './Login.styles';
 
-type ErrorObject = {
-  message: string;
+type LoginProps = {
+  config: Config;
 };
 
-type LoginErrors = {
-  username: ErrorObject;
-  password: ErrorObject;
-};
-
-const Login: React.FC = () => {
+const Login: React.FC<LoginProps> = ({ config }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errors, setErrors] = useState<LoginErrors>(null);
+  const [errors, setErrors] = useState<AuthErrorObject>(null);
   const ref = useRef<HTMLFormElement>(null);
 
-  const router = useRouter();
-  const { login, hasSession } = useSession();
+  const { login, hasSession } = useSession(config);
 
   const handleSubmit = useCallback(async () => {
     try {
       await login(username, password);
     } catch (error) {
       setErrors(error.response?.data);
-      setPassword('');
     }
   }, [login, password, username]);
 
@@ -45,18 +40,12 @@ const Login: React.FC = () => {
       }
     };
 
-    if (hasSession) {
-      router.push('/profile');
-
-      return;
-    }
-
     document.addEventListener('keydown', handleKeyboardInput);
 
     return () => {
       document.removeEventListener('keydown', handleKeyboardInput);
     };
-  }, [handleSubmit, hasSession, router]);
+  }, [handleSubmit, hasSession]);
 
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -101,7 +90,6 @@ const Login: React.FC = () => {
           {usernameClear}
           {usernameError}
         </div>
-
         <p className="label">Password</p>
         <div className="input-frame input-password">
           <input
@@ -114,11 +102,9 @@ const Login: React.FC = () => {
           {passwordError}
         </div>
       </form>
-
       <button type="button" onClick={handleSubmit} className="submit-button">
         Sign in
       </button>
-
       <Link href="/register" className="redirect">
         Don&apos;t have an account? <span>Sign up</span>
       </Link>
@@ -126,4 +112,4 @@ const Login: React.FC = () => {
   );
 };
 
-export { Login, type LoginErrors };
+export { Login };

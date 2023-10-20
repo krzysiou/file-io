@@ -2,31 +2,20 @@
 
 import React from 'react';
 
-import type { Session } from '../../../hooks/use-session';
+import type { UserData } from '../../../fetching/types';
 
 import { ProfileStyled } from './Profile.styles';
-import { useSession } from '../../../hooks/use-session';
 
-const mockUserData = {
-  files: [
-    { id: 'file-id-123', type: 'spz', name: 'Mock Spz', date: Date.now() },
-  ],
+type ProfileProps = {
+  userData: UserData;
 };
 
-const getMockUser = (session: Session) => ({
-  ...session,
-  files: mockUserData.files,
-});
-
-const Profile: React.FC = () => {
-  const { session } = useSession();
-  const mockSession = getMockUser(session);
+const Profile: React.FC<ProfileProps> = ({ userData }) => {
+  const { id } = userData;
 
   return (
     <ProfileStyled>
-      <p>username : {mockSession?.username}</p>
-      <p>Hi from user {mockSession?.accessToken}</p>
-      {mockSession.files[0].id}
+      <p>this is username: {id}</p>
     </ProfileStyled>
   );
 };

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import type { LoginErrors } from './Login';
+import type { AuthErrorObject } from '../../types';
 
 import { styleVariables } from '../../../../public/styles/utils/styleVariables';
 import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
@@ -8,7 +8,7 @@ import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 const { colors, paddings, mediaBreakpoint } = styleVariables;
 
 type LoginStyledProps = {
-  errors: LoginErrors;
+  errors: AuthErrorObject;
 };
 
 const LoginStyled = styled.div<LoginStyledProps>`

@@ -5,38 +5,20 @@ import Cookies from 'js-cookie';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import { config } from '../config/config';
+import type { Config } from '../../config/types';
+import type { Session } from '../fetching/types';
 
-const { apiUrl } = config;
-
-const COOKIE_NAME = 'session';
-const EXPIRE_DAYS = 7;
-
-type FileType = 'spz';
-
-type File = {
-  id: string;
-  type: FileType;
-  name: string;
-  date: number;
-};
-
-type Session = {
-  username: string;
-  files: File[];
-  accessToken: string;
-  expire: number;
-};
-
-const useSession = () => {
+const useSession = (config: Config) => {
   const [session, setSession] = useState<Session>(null);
   const [hasSession, setHasSession] = useState<boolean>(false);
+
+  const { apiUrl, sessionCookieName, sessionCookieExpireDays } = config;
 
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const sessionCookie = Cookies.get(COOKIE_NAME);
+    const sessionCookie = Cookies.get(sessionCookieName);
 
     if (sessionCookie) {
       setHasSession(true);
@@ -47,7 +29,7 @@ const useSession = () => {
 
     setHasSession(false);
     setSession(null);
-  }, [pathname]);
+  }, [pathname, sessionCookieName]);
 
   const register = useCallback(
     async (username: string, password: string) => {
@@ -56,13 +38,13 @@ const useSession = () => {
         password,
       });
 
-      await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
-        expires: EXPIRE_DAYS,
+      await Cookies.set(sessionCookieName, JSON.stringify(data), {
+        expires: sessionCookieExpireDays,
       });
 
       router.push('/profile');
     },
-    [router]
+    [apiUrl, router, sessionCookieExpireDays, sessionCookieName]
   );
 
   const login = useCallback(
@@ -72,19 +54,19 @@ const useSession = () => {
         password,
       });
 
-      await Cookies.set(COOKIE_NAME, JSON.stringify(data), {
-        expires: EXPIRE_DAYS,
+      await Cookies.set(sessionCookieName, JSON.stringify(data), {
+        expires: sessionCookieExpireDays,
       });
 
       router.push('/profile');
     },
-    [router]
+    [apiUrl, router, sessionCookieExpireDays, sessionCookieName]
   );
 
   const logout = useCallback(async () => {
-    await Cookies.remove(COOKIE_NAME);
+    await Cookies.remove(sessionCookieName);
     router.push('/login');
-  }, [router]);
+  }, [router, sessionCookieName]);
 
   return {
     session,
@@ -95,4 +77,4 @@ const useSession = () => {
   };
 };
 
-export { useSession, COOKIE_NAME, type Session };
+export { useSession, type Session };

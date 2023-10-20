@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import type { RegisterErrors } from './Register';
+import type { AuthErrorObject } from '../../types';
 
 import { styleVariables } from '../../../../public/styles/utils/styleVariables';
 import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
@@ -8,7 +8,7 @@ import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 const { colors, paddings, mediaBreakpoint } = styleVariables;
 
 type RegisterStyledProps = {
-  errors: RegisterErrors;
+  errors: AuthErrorObject;
 };
 
 const RegisterStyled = styled.div<RegisterStyledProps>`

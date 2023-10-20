@@ -3,7 +3,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import type { Session } from './src/hooks/use-session';
 
-import { COOKIE_NAME } from './src/hooks/use-session';
+import { config as appConfig } from './config/config';
+
+const { sessionCookieName } = appConfig;
 
 const validationPaths = ['/login', '/register'];
 
@@ -13,7 +15,7 @@ export const config = {
 
 const middleware = (request: NextRequest) => {
   const isValidationPath = validationPaths.includes(request.nextUrl.pathname);
-  const sessionCookie = request.cookies.get(COOKIE_NAME)?.value;
+  const sessionCookie = request.cookies.get(sessionCookieName)?.value;
 
   const loginUrl = new URL('/login', request.url);
   const profileUrl = new URL('/profile', request.url);
@@ -34,8 +36,8 @@ const middleware = (request: NextRequest) => {
     if (sessionCookie && now > session.expire) {
       const response = NextResponse.redirect(loginUrl);
 
-      request.cookies.delete(COOKIE_NAME);
-      response.cookies.delete(COOKIE_NAME);
+      request.cookies.delete(sessionCookieName);
+      response.cookies.delete(sessionCookieName);
 
       return response;
     }

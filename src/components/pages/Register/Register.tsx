@@ -2,33 +2,30 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
+import type { Config } from '../../../../config/types';
+import type { AuthErrorObject } from '../../types';
 
 import { useSession } from '../../../hooks/use-session';
 import { RegisterStyled } from './Register.styles';
-type ErrorObject = {
-  message: string;
+
+type RegisterProps = {
+  config: Config;
 };
 
-type RegisterErrors = {
-  username: ErrorObject;
-  password: ErrorObject;
-};
-const Register: React.FC = () => {
+const Register: React.FC<RegisterProps> = ({ config }) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errors, setErrors] = useState<RegisterErrors>();
+  const [errors, setErrors] = useState<AuthErrorObject>();
   const ref = useRef<HTMLFormElement>(null);
 
-  const router = useRouter();
-  const { register, hasSession } = useSession();
+  const { register, hasSession } = useSession(config);
 
   const handleSubmit = useCallback(async () => {
     try {
       await register(username, password);
     } catch (error) {
       setErrors(error.response?.data);
-      setPassword('');
     }
   }, [register, password, username]);
 
@@ -43,18 +40,12 @@ const Register: React.FC = () => {
       }
     };
 
-    if (hasSession) {
-      router.push('/profile');
-
-      return;
-    }
-
     document.addEventListener('keydown', handleKeyboardInput);
 
     return () => {
       document.removeEventListener('keydown', handleKeyboardInput);
     };
-  }, [handleSubmit, hasSession, router]);
+  }, [handleSubmit, hasSession]);
 
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -87,7 +78,6 @@ const Register: React.FC = () => {
       <p className="hero">
         <span>Sign up</span>
       </p>
-
       <form ref={ref}>
         <p className="label">Username</p>
         <div className="input-frame input-username">
@@ -100,7 +90,6 @@ const Register: React.FC = () => {
           {usernameClear}
           {usernameError}
         </div>
-
         <p className="label">Password</p>
         <div className="input-frame input-password">
           <input
@@ -113,11 +102,9 @@ const Register: React.FC = () => {
           {passwordError}
         </div>
       </form>
-
       <button type="button" onClick={handleSubmit} className="submit-button">
         Sign up
       </button>
-
       <Link href="/login" className="redirect">
         Already have an account? <span>Sign in</span>
       </Link>
@@ -125,4 +112,4 @@ const Register: React.FC = () => {
   );
 };
 
-export { Register, type RegisterErrors };
+export { Register };
