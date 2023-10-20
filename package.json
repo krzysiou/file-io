@@ -19,13 +19,12 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "babel-plugin-styled-components": "^2.1.4",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@schibsted/data-controller": "^3.6.0",
     "axios": "^1.5.1",
-    "babel-plugin-styled-components": "^2.1.4",
     "dotenv": "^16.3.1",
     "js-cookie": "^3.0.5",
     "next": "^13.4.12",
