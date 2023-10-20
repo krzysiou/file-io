@@ -4,19 +4,13 @@ type Session = {
   expire: number;
 };
 
-type FileType = 'spz';
-
 type UserFile = {
   id: string;
-  type: FileType;
-  name: string;
-  date: number;
+  title: string;
 };
 
-type UserData = {
-  id: string;
-  username?: string;
-  files?: UserFile[];
+type UserData = Session & {
+  files: UserFile[];
 };
 
 export { type UserData, type Session };

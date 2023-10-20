@@ -9,7 +9,7 @@ import type { Session } from '../fetching/types';
 
 import { config } from '../../config/config';
 
-const { apiUrl, sessionCookieName, sessionCookieExpireDays } = config;
+const { apiUrl, sessionCookieName } = config;
 
 const useSession = () => {
   const [session, setSession] = useState<Session>(null);
@@ -39,7 +39,7 @@ const useSession = () => {
       });
 
       await Cookies.set(sessionCookieName, JSON.stringify(data), {
-        expires: sessionCookieExpireDays,
+        expires: data.expire,
       });
 
       router.push('/profile');
@@ -55,7 +55,7 @@ const useSession = () => {
       });
 
       await Cookies.set(sessionCookieName, JSON.stringify(data), {
-        expires: sessionCookieExpireDays,
+        expires: data.expire / 24 / 60 / 60 / 1000,
       });
 
       router.push('/profile');

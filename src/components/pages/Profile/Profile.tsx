@@ -11,11 +11,18 @@ type ProfileProps = {
 };
 
 const Profile: React.FC<ProfileProps> = ({ userData }) => {
-  const { id } = userData;
+  const { id, files } = userData;
+
+  const filesComponent = files.map((file) => (
+    <p key={file.id}>
+      {file.id}, {file.title}
+    </p>
+  ));
 
   return (
     <ProfileStyled>
-      <p>this is username: {id}</p>
+      <p>this is user id: {id}</p>
+      {filesComponent}
     </ProfileStyled>
   );
 };
