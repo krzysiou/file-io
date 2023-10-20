@@ -4,22 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import type { Config } from '../../../../config/types';
-
 import { LogoIcon, MenuIcon } from '../Icons';
 import { HeaderStyled } from './Header.styles';
 import { Dropdown } from './Dropdown';
 import { useSession } from '../../../hooks/use-session';
 
-type HeaderProps = {
-  config: Config;
-};
-
-const Header: React.FC<HeaderProps> = ({ config }) => {
+const Header: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const router = useRouter();
-  const { hasSession, logout } = useSession(config);
+  const { hasSession, logout } = useSession();
 
   const handleOpen = () => setOpen(!open);
   const closeMenu = () => setOpen(false);

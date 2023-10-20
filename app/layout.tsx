@@ -5,7 +5,6 @@ import { Header } from '../src/components/shared/Header/Header';
 import { Footer } from '../src/components/shared/Footer/Footer';
 import { Reset } from '../public/styles/Reset.styles';
 import { Globals } from '../public/styles/Globals.styles';
-import { config } from '../config/config';
 
 export default function RootLayout({
   children,
@@ -22,7 +21,7 @@ export default function RootLayout({
           <Reset />
           <Globals />
           <body>
-            <Header config={config} />
+            <Header />
             {children}
             <Footer />
           </body>

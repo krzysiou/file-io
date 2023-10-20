@@ -3,23 +3,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-import type { Config } from '../../../../config/types';
 import type { AuthErrorObject } from '../../types';
 
 import { useSession } from '../../../hooks/use-session';
 import { LoginStyled } from './Login.styles';
 
-type LoginProps = {
-  config: Config;
-};
-
-const Login: React.FC<LoginProps> = ({ config }) => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<AuthErrorObject>(null);
   const ref = useRef<HTMLFormElement>(null);
 
-  const { login, hasSession } = useSession(config);
+  const { login, hasSession } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {

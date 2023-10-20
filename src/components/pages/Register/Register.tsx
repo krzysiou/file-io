@@ -3,23 +3,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
-import type { Config } from '../../../../config/types';
 import type { AuthErrorObject } from '../../types';
 
 import { useSession } from '../../../hooks/use-session';
 import { RegisterStyled } from './Register.styles';
 
-type RegisterProps = {
-  config: Config;
-};
-
-const Register: React.FC<RegisterProps> = ({ config }) => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<AuthErrorObject>();
   const ref = useRef<HTMLFormElement>(null);
 
-  const { register, hasSession } = useSession(config);
+  const { register, hasSession } = useSession();
 
   const handleSubmit = useCallback(async () => {
     try {

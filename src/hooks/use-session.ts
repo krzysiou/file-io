@@ -5,15 +5,15 @@ import Cookies from 'js-cookie';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import type { Config } from '../../config/types';
 import type { Session } from '../fetching/types';
 
-const useSession = (config: Config) => {
+import { config } from '../../config/config';
+
+const { apiUrl, sessionCookieName, sessionCookieExpireDays } = config;
+
+const useSession = () => {
   const [session, setSession] = useState<Session>(null);
   const [hasSession, setHasSession] = useState<boolean>(false);
-
-  const { apiUrl, sessionCookieName, sessionCookieExpireDays } = config;
-
   const router = useRouter();
   const pathname = usePathname();
 
@@ -29,7 +29,7 @@ const useSession = (config: Config) => {
 
     setHasSession(false);
     setSession(null);
-  }, [pathname, sessionCookieName]);
+  }, [pathname]);
 
   const register = useCallback(
     async (username: string, password: string) => {
@@ -44,7 +44,7 @@ const useSession = (config: Config) => {
 
       router.push('/profile');
     },
-    [apiUrl, router, sessionCookieExpireDays, sessionCookieName]
+    [router]
   );
 
   const login = useCallback(
@@ -60,13 +60,13 @@ const useSession = (config: Config) => {
 
       router.push('/profile');
     },
-    [apiUrl, router, sessionCookieExpireDays, sessionCookieName]
+    [router]
   );
 
   const logout = useCallback(async () => {
     await Cookies.remove(sessionCookieName);
     router.push('/login');
-  }, [router, sessionCookieName]);
+  }, [router]);
 
   return {
     session,
