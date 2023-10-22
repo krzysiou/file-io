@@ -22,6 +22,8 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
     router.refresh();
   }, [router]);
 
+  const handleCreateClick = () => router.push('/profile/create');
+
   const filesComponent =
     files && files.length != 0 ? (
       files.map((file) => <File key={file.id} file={file} />)
@@ -37,7 +39,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
       <p className="hero">
         <span>Your files</span>
       </p>
-      <button className="create-file">
+      <button className="create-file" onClick={handleCreateClick}>
         <p>Create</p>
         <PlusIcon />
       </button>

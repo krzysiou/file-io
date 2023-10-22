@@ -4,7 +4,7 @@ type Session = {
   expire: number;
 };
 
-type FileType = 'spz';
+type FileType = 'spz' | 'status-studenta';
 
 type Form = {
   firstName: string;
