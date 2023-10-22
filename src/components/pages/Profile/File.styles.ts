@@ -34,6 +34,7 @@ const FileStyled = styled.div`
     overflow: hidden;
     font-weight: 200;
     font-size: 14px;
+    line-height: 20px;
 
     ${mediaQuery['web']} {
       width: 40%;

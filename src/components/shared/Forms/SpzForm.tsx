@@ -5,21 +5,22 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import type {
-  FormError,
+  ErrorObject,
   MainSubjectField,
   SideSubjectField,
   SpzInfo,
-} from './types';
-import type { MainSubject, SideSubject } from '../../../../fetching/types';
+  MainSubject,
+  SideSubject,
+} from '../../../types';
 
 import {
   adjustMainArraySize,
   adjustSideArraySize,
   replaceMainArrayElement,
   replaceSideArrayElement,
-} from './utils';
-import { config } from '../../../../../config/config';
-import { useSession } from '../../../../hooks/use-session';
+} from '../../../utils';
+import { config } from '../../../../config/config';
+import { useSession } from '../../../hooks/use-session';
 import { SpzFormStyled } from './SpzForm.styles';
 
 const { apiUrl } = config;
@@ -65,7 +66,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
   const [term, setTerm] = useState<string>(info.term);
   const [year, setYear] = useState<string>(info.year);
 
-  const [errors, setErrors] = useState<FormError>(null);
+  const [errors, setErrors] = useState<ErrorObject>(null);
 
   const [mainSubjectsArray, setMainSubjectsArray] =
     useState<MainSubject[]>(mainSubjects);

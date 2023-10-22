@@ -17,11 +17,15 @@ type SpzInfo = {
   year: string;
 };
 
+type MainSubjectField = 'name' | 'wclps' | 'ects';
+
 type MainSubject = {
   name: string;
   wclps: string;
   ects: string;
 };
+
+type SideSubjectField = 'name' | 'wclps' | 'ects' | 'faculty';
 
 type SideSubject = {
   name: string;
@@ -51,6 +55,14 @@ type User = {
   files: File[];
 };
 
+type ErrorObject = {
+  message: string;
+};
+
+type AuthErrorObject = {
+  username: ErrorObject;
+  password: ErrorObject;
+};
 export {
   type User,
   type Session,
@@ -58,4 +70,9 @@ export {
   type File,
   type MainSubject,
   type SideSubject,
+  type MainSubjectField,
+  type SideSubjectField,
+  type ErrorObject,
+  type AuthErrorObject,
+  type SpzInfo,
 };

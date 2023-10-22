@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import type { File as FileType } from '../../../fetching/types';
+import type { File as FileType } from '../../../types';
 
 import { FileStyled } from './File.styles';
 import { DeleteIcon } from '../../shared/Icons/DeleteIcon';

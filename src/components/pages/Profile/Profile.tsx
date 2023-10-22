@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import type { User } from '../../../fetching/types';
+import type { User } from '../../../types';
 
 import { ProfileStyled } from './Profile.styles';
 import { File } from './File';

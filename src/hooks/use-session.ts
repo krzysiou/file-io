@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 
-import type { Session } from '../fetching/types';
+import type { Session } from '../types';
 
 import { config } from '../../config/config';
 

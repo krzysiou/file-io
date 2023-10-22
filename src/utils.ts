@@ -1,5 +1,9 @@
-import type { MainSubjectField, SideSubjectField } from './types';
-import type { MainSubject, SideSubject } from '../../../../fetching/types';
+import type {
+  MainSubject,
+  MainSubjectField,
+  SideSubject,
+  SideSubjectField,
+} from './types';
 
 const adjustMainArraySize = (array: MainSubject[], length: number) => {
   if (array.length < length) {

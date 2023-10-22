@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import type { File } from '../../../fetching/types';
+import type { File } from '../../../types';
 
 import { EditStyled } from './Edit.styles';
-import { SpzForm } from '../Create/Forms/SpzForm';
+import { SpzForm } from '../../shared/Forms/SpzForm';
 
 const getForm = (file: File) => {
   const { id, type, title, form, dateOfCreation } = file;

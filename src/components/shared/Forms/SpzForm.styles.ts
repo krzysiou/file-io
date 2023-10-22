@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
-import { styleVariables } from '../../../../../public/styles/utils/styleVariables';
-import { mediaQuery } from '../../../../../public/styles/utils/mediaQuery';
+import { styleVariables } from '../../../../public/styles/utils/styleVariables';
+import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
 
 const { colors } = styleVariables;
 
@@ -13,6 +13,10 @@ const SpzFormStyled = styled.div`
   width: 100%;
   margin-bottom: 200px;
   text-align: left;
+
+  input {
+    color: ${colors.accentDark};
+  }
 
   ${mediaQuery['web']} {
     width: 550px;

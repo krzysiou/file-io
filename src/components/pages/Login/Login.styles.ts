@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-import type { AuthErrorObject } from '../../types';
+import type { AuthErrorObject } from '../../../types';
 
 import { styleVariables } from '../../../../public/styles/utils/styleVariables';
 import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
