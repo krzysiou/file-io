@@ -60,10 +60,10 @@ const SpzFormStyled = styled.div`
           }
 
           input {
-            width: 100%;
+            width: calc(100% - 10px);
             border: 1px solid ${colors.action};
             border-radius: 5px;
-            padding: 5px 0;
+            padding: 5px 5px;
           }
         }
       }
@@ -93,20 +93,27 @@ const SpzFormStyled = styled.div`
       width: 100%;
     }
 
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 10px 0;
+    div {
+      width: 100%;
 
-      > input {
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         width: 100%;
-        border: 1px solid ${colors.action};
-        border-radius: 5px;
-        padding: 5px 5px;
+        margin: 10px 0;
 
-        ${mediaQuery['web']} {
-          width: 30%;
+        > input {
+          width: calc(100% - 10px);
+          border: 1px solid ${colors.action};
+          border-radius: 5px;
+          padding: 5px 5px;
+          margin-bottom: 10px;
+
+          ${mediaQuery['web']} {
+            width: 30%;
+            margin-bottom: 0;
+          }
         }
       }
     }
@@ -123,20 +130,26 @@ const SpzFormStyled = styled.div`
       width: 100%;
     }
 
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 10px 0;
+    div {
+      width: 100%;
 
-      > input {
-        width: 100%;
-        border: 1px solid ${colors.action};
-        border-radius: 5px;
-        padding: 5px 5px;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 10px 0;
 
-        ${mediaQuery['web']} {
-          width: 20%;
+        > input {
+          width: calc(100% - 10px);
+          border: 1px solid ${colors.action};
+          border-radius: 5px;
+          padding: 5px 5px;
+          margin-bottom: 10px;
+
+          ${mediaQuery['web']} {
+            width: 20%;
+            margin-bottom: 0;
+          }
         }
       }
     }

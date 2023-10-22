@@ -153,7 +153,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
       type,
       value
     );
-    setMainSubjectsArray(newArray);
+    setSideSubjectsArray(newArray);
   };
 
   const error = errors ? <span className="error">{errors.message}</span> : null;
