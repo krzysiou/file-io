@@ -12,9 +12,6 @@ const getForm = (fileType: FileType) => {
     case 'spz': {
       return <SpzForm />;
     }
-    case 'status-studenta': {
-      return <StatusForm />;
-    }
     default: {
       return null;
     }

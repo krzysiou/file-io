@@ -1,13 +1,3 @@
-type SpzInfoField =
-  | 'name'
-  | 'surname'
-  | 'albumNumber'
-  | 'fieldOfStudy'
-  | 'email'
-  | 'level'
-  | 'term'
-  | 'year';
-
 type SpzInfo = {
   name: string;
   surname: string;
@@ -43,7 +33,6 @@ type FormError = {
 export {
   type FormError,
   type SpzInfo,
-  type SpzInfoField,
   type MainSubject,
   type MainSubjectField,
   type SideSubject,

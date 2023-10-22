@@ -11,7 +11,6 @@ import type {
   SideSubject,
   SideSubjectField,
   SpzInfo,
-  SpzInfoField,
 } from './types';
 
 import {
@@ -51,7 +50,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
   sideSubjects = [],
 }) => {
   const [spzTitle, setSpzTitle] = useState<string>(title);
-  const [spzInfo, setSpzInfo] = useState<SpzInfo>(info);
+
+  const [name, setName] = useState<string>(info.name);
+  const [surname, setSurname] = useState<string>(info.surname);
+  const [albumNumber, setAlbumNumber] = useState<string>(info.albumNumber);
+  const [fieldOfStudy, setFieldOfStudy] = useState<string>(info.fieldOfStudy);
+  const [email, setEmail] = useState<string>(info.email);
+  const [level, setLevel] = useState<string>(info.level);
+  const [term, setTerm] = useState<string>(info.term);
+  const [year, setYear] = useState<string>(info.year);
+
   const [errors, setErrors] = useState<FormError>(null);
 
   const [mainSubjectsArray, setMainSubjectsArray] =
@@ -68,17 +76,6 @@ const SpzForm: React.FC<SpzFormParams> = ({
 
   const router = useRouter();
   const { session } = useSession();
-
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setSpzTitle(event.target.value);
-
-  const handleInfoChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: SpzInfoField
-  ) => {
-    spzInfo[type] = event.target.value;
-    setSpzInfo({ ...spzInfo });
-  };
 
   const handleMainSubjectChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -165,16 +162,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
           <p className="label">Name</p>
           <input
             type="text"
-            value={spzInfo?.name}
-            onChange={(event) => handleInfoChange(event, 'name')}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
           />
         </div>
         <div className="entry">
           <p className="label">Surname</p>
           <input
             type="text"
-            value={spzInfo?.surname}
-            onChange={(event) => handleInfoChange(event, 'surname')}
+            value={surname}
+            onChange={(event) => setSurname(event.target.value)}
           />
         </div>
       </li>
@@ -183,16 +180,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
           <p className="label">Album number</p>
           <input
             type="text"
-            value={spzInfo?.albumNumber}
-            onChange={(event) => handleInfoChange(event, 'albumNumber')}
+            value={albumNumber}
+            onChange={(event) => setAlbumNumber(event.target.value)}
           />
         </div>
         <div className="entry">
           <p className="label">Field of study</p>
           <input
             type="text"
-            value={spzInfo?.fieldOfStudy}
-            onChange={(event) => handleInfoChange(event, 'fieldOfStudy')}
+            value={fieldOfStudy}
+            onChange={(event) => setFieldOfStudy(event.target.value)}
           />
         </div>
       </li>
@@ -201,16 +198,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
           <p className="label">Email</p>
           <input
             type="text"
-            value={spzInfo?.email}
-            onChange={(event) => handleInfoChange(event, 'email')}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </div>
         <div className="entry">
           <p className="label">Level</p>
           <input
             type="text"
-            value={spzInfo?.level}
-            onChange={(event) => handleInfoChange(event, 'level')}
+            value={level}
+            onChange={(event) => setLevel(event.target.value)}
           />
         </div>
       </li>
@@ -219,16 +216,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
           <p className="label">Term</p>
           <input
             type="text"
-            value={spzInfo?.term}
-            onChange={(event) => handleInfoChange(event, 'term')}
+            value={term}
+            onChange={(event) => setTerm(event.target.value)}
           />
         </div>
         <div className="entry">
           <p className="label">Year</p>
           <input
             type="text"
-            value={spzInfo?.year}
-            onChange={(event) => handleInfoChange(event, 'year')}
+            value={year}
+            onChange={(event) => setYear(event.target.value)}
           />
         </div>
       </li>
@@ -311,7 +308,16 @@ const SpzForm: React.FC<SpzFormParams> = ({
           dateOfCreation,
           dateOfUpdate: null,
           form: {
-            info: spzInfo,
+            info: {
+              name,
+              surname,
+              albumNumber,
+              fieldOfStudy,
+              email,
+              level,
+              term,
+              year,
+            },
             mainSubjects: mainSubjectsArray,
             sideSubjects: sideSubjectsArray,
           },
@@ -335,7 +341,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
           type="text"
           value={spzTitle}
           className="file-name"
-          onChange={handleTitleChange}
+          onChange={(event) => setSpzTitle(event.target.value)}
         />
         <ul>{infoComponent}</ul>
       </div>
