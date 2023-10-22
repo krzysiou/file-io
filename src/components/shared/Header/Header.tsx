@@ -20,6 +20,7 @@ const Header: React.FC = () => {
 
   const handleSignOutClick = () => {
     logout();
+    closeMenu();
     router.push('/login');
   };
 

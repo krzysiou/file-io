@@ -4,13 +4,26 @@ type Session = {
   expire: number;
 };
 
+type FileType = 'spz';
+
+type Form = {
+  firstName: string;
+  surname: string;
+};
+
 type UserFile = {
   id: string;
   title: string;
+  type: FileType;
+  dateOfCreation: number;
+  dateOfUpdate: number;
+  form: Form;
 };
 
-type UserData = Session & {
+type User = {
+  id: string;
+  username: string;
   files: UserFile[];
 };
 
-export { type UserData, type Session };
+export { type User, type Session, type FileType, type UserFile };

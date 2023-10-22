@@ -1,23 +1,21 @@
 import { cookies } from 'next/headers';
+import axios from 'axios';
 
-import type { Session, UserData } from './types';
+import type { Session, User } from './types';
 
 import { config } from '../../config/config';
 
 const { apiUrl, sessionCookieName } = config;
 
-const getUserData = async (): Promise<UserData> => {
+const getUserData = async (): Promise<User> => {
   const cookieStore = cookies();
-  const sessionCookie = cookieStore.get(sessionCookieName).value;
+  const session: Session = JSON.parse(cookieStore.get(sessionCookieName).value);
 
-  const session: Session = JSON.parse(sessionCookie);
-
-  const data = await fetch(`${apiUrl}/admin/data`, {
-    next: { revalidate: 0 },
+  const { data } = await axios.get<User>(`${apiUrl}/admin/data`, {
     headers: { Authorization: `Bearer ${session.accessToken}` },
   });
 
-  return data.json();
+  return data;
 };
 
 export { getUserData };
