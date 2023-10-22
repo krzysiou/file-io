@@ -83,31 +83,6 @@ const CreateStyled = styled.div`
       font-size: 14px;
     }
   }
-
-  .submit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${colors.action};
-    border: 2px solid ${colors.light};
-    border-radius: 10px;
-    padding: 5px 10px;
-    margin: 10px;
-    transition: 0.2s;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 5px;
-    color: ${colors.light};
-
-    &:hover {
-      border: 2px solid ${colors.action};
-    }
-
-    ${mediaQuery['web']} {
-      padding: 8px 15px;
-      font-size: 20px;
-    }
-  }
 `;
 
 export { CreateStyled };

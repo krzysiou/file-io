@@ -6,24 +6,56 @@ type Session = {
 
 type FileType = 'spz' | 'status-studenta';
 
-type Form = {
-  firstName: string;
+type SpzInfo = {
+  name: string;
   surname: string;
+  albumNumber: string;
+  fieldOfStudy: string;
+  email: string;
+  level: string;
+  term: string;
+  year: string;
 };
 
-type UserFile = {
+type MainSubject = {
+  name: string;
+  wclps: string;
+  ects: string;
+};
+
+type SideSubject = {
+  name: string;
+  wclps: string;
+  ects: string;
+  faculty: string;
+};
+
+interface SpzForm {
+  info: SpzInfo;
+  mainSubjects: MainSubject[];
+  sideSubjects: SideSubject[];
+}
+
+interface File {
   id: string;
   title: string;
   type: FileType;
   dateOfCreation: number;
   dateOfUpdate: number;
-  form: Form;
-};
+  form: SpzForm;
+}
 
 type User = {
   id: string;
   username: string;
-  files: UserFile[];
+  files: File[];
 };
 
-export { type User, type Session, type FileType, type UserFile };
+export {
+  type User,
+  type Session,
+  type FileType,
+  type File,
+  type MainSubject,
+  type SideSubject,
+};

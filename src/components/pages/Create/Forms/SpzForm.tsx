@@ -6,12 +6,11 @@ import { useRouter } from 'next/navigation';
 
 import type {
   FormError,
-  MainSubject,
   MainSubjectField,
-  SideSubject,
   SideSubjectField,
   SpzInfo,
 } from './types';
+import type { MainSubject, SideSubject } from '../../../../fetching/types';
 
 import {
   adjustMainArraySize,
@@ -37,17 +36,23 @@ const defaultInfo: SpzInfo = {
 };
 
 type SpzFormParams = {
+  mode: 'create' | 'update';
+  id?: string;
   title?: string;
   info?: SpzInfo;
   mainSubjects?: MainSubject[];
   sideSubjects?: SideSubject[];
+  dateOfCreation?: number;
 };
 
 const SpzForm: React.FC<SpzFormParams> = ({
+  mode,
+  id,
   title = '',
   info = defaultInfo,
   mainSubjects = [],
   sideSubjects = [],
+  dateOfCreation = null,
 }) => {
   const [spzTitle, setSpzTitle] = useState<string>(title);
 
@@ -297,35 +302,46 @@ const SpzForm: React.FC<SpzFormParams> = ({
   );
 
   const handleSubmit = async () => {
-    const dateOfCreation = Date.now();
+    const file = {
+      id,
+      title: spzTitle,
+      type: 'spz',
+      dateOfCreation: mode === 'create' ? Date.now() : dateOfCreation,
+      dateOfUpdate: mode === 'create' ? null : Date.now(),
+      form: {
+        info: {
+          name,
+          surname,
+          albumNumber,
+          fieldOfStudy,
+          email,
+          level,
+          term,
+          year,
+        },
+        mainSubjects: mainSubjectsArray,
+        sideSubjects: sideSubjectsArray,
+      },
+    };
 
     try {
-      await axios.post(
-        `${apiUrl}/admin/create`,
-        {
-          title: spzTitle,
-          type: 'spz',
-          dateOfCreation,
-          dateOfUpdate: null,
-          form: {
-            info: {
-              name,
-              surname,
-              albumNumber,
-              fieldOfStudy,
-              email,
-              level,
-              term,
-              year,
-            },
-            mainSubjects: mainSubjectsArray,
-            sideSubjects: sideSubjectsArray,
-          },
-        },
-        {
-          headers: { Authorization: `Bearer ${session.accessToken}` },
-        }
-      );
+      if (mode === 'create') {
+        await axios.post(
+          `${apiUrl}/admin/create`,
+          { file },
+          {
+            headers: { Authorization: `Bearer ${session.accessToken}` },
+          }
+        );
+      } else {
+        await axios.post(
+          `${apiUrl}/admin/update`,
+          { file },
+          {
+            headers: { Authorization: `Bearer ${session.accessToken}` },
+          }
+        );
+      }
 
       router.push('/profile');
     } catch (error) {

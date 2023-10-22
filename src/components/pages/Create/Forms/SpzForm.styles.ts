@@ -12,6 +12,7 @@ const SpzFormStyled = styled.div`
   justify-content: center;
   width: 100%;
   margin-bottom: 200px;
+  text-align: left;
 
   ${mediaQuery['web']} {
     width: 550px;
@@ -22,12 +23,37 @@ const SpzFormStyled = styled.div`
     font-size: 12px;
   }
 
+  .submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${colors.action};
+    border: 2px solid ${colors.light};
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
+    color: ${colors.light};
+
+    &:hover {
+      border: 2px solid ${colors.action};
+    }
+
+    ${mediaQuery['web']} {
+      padding: 8px 15px;
+      font-size: 20px;
+    }
+  }
+
   .file-name {
     margin: 0 auto;
-    width: 100%;
+    width: calc(100% - 10px);
     border: 1px solid ${colors.action};
     border-radius: 5px;
-    padding: 5px 0;
+    padding: 5px 5px;
   }
 
   div {

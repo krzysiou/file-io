@@ -11,20 +11,7 @@ type SpzInfo = {
 
 type MainSubjectField = 'name' | 'wclps' | 'ects';
 
-type MainSubject = {
-  name: string;
-  wclps: string;
-  ects: string;
-};
-
 type SideSubjectField = 'name' | 'wclps' | 'ects' | 'faculty';
-
-type SideSubject = {
-  name: string;
-  wclps: string;
-  ects: string;
-  faculty: string;
-};
 
 type FormError = {
   message: string;
@@ -33,8 +20,6 @@ type FormError = {
 export {
   type FormError,
   type SpzInfo,
-  type MainSubject,
   type MainSubjectField,
-  type SideSubject,
   type SideSubjectField,
 };

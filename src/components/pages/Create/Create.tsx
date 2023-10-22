@@ -10,7 +10,7 @@ import { SpzForm } from './Forms/SpzForm';
 const getForm = (fileType: FileType) => {
   switch (fileType) {
     case 'spz': {
-      return <SpzForm />;
+      return <SpzForm mode="create" />;
     }
     default: {
       return null;

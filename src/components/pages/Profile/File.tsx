@@ -2,22 +2,28 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
-import type { UserFile } from '../../../fetching/types';
+import type { File as FileType } from '../../../fetching/types';
 
 import { FileStyled } from './File.styles';
 import { DeleteIcon } from '../../shared/Icons/DeleteIcon';
 import { DownloadIcon } from '../../shared/Icons/DownloadIcon';
 import { EditIcon } from '../../shared/Icons/EditIcon';
+import { config } from '../../../../config/config';
+import { useSession } from '../../../hooks/use-session';
+
+const { apiUrl } = config;
 
 type FileProps = {
-  file: UserFile;
+  file: FileType;
 };
 
 const File: React.FC<FileProps> = ({ file }) => {
   const router = useRouter();
+  const { session } = useSession();
 
-  const { id, title, dateOfCreation, dateOfUpdate, type } = file;
+  const { id, title, dateOfCreation, dateOfUpdate } = file;
 
   const createDateString = new Date(dateOfCreation).toDateString();
   const updateDateString = new Date(dateOfUpdate).toDateString();
@@ -26,12 +32,27 @@ const File: React.FC<FileProps> = ({ file }) => {
     <p className="file-date">updated: {updateDateString}</p>
   );
 
-  const handleEditClick = () => {};
-
-  const handleDeleteClick = () => {};
-
+  const handleEditClick = () => {
+    router.push(`/profile/edit?id=${id}`);
+  };
   const handleDownloadClick = () => {
-    router.push(`/${type}/${id}`);
+    router.push(`/profile/download?id=${id}`);
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await axios.post(
+        `${apiUrl}/admin/delete`,
+        { id },
+        {
+          headers: { Authorization: `Bearer ${session.accessToken}` },
+        }
+      );
+
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
