@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import type { FileType } from '../../../types';
 
 import { CreateStyled } from './Create.styles';
-import { SpzForm } from '../../shared/Forms/SpzForm';
+import { SpzForm } from '../../files/Forms/SpzForm';
 
 const getForm = (fileType: FileType) => {
   switch (fileType) {

@@ -8,9 +8,9 @@ import type {
   ErrorObject,
   MainSubjectField,
   SideSubjectField,
-  SpzInfo,
   MainSubject,
   SideSubject,
+  File,
 } from '../../../types';
 
 import {
@@ -25,38 +25,44 @@ import { SpzFormStyled } from './SpzForm.styles';
 
 const { apiUrl } = config;
 
-const defaultInfo: SpzInfo = {
-  name: '',
-  surname: '',
-  albumNumber: '',
-  fieldOfStudy: '',
-  email: '',
-  level: '',
-  term: '',
-  year: '',
+const defaultFile: File = {
+  id: '',
+  title: '',
+  type: 'spz',
+  dateOfCreation: 0,
+  dateOfUpdate: 0,
+  form: {
+    info: {
+      name: '',
+      surname: '',
+      albumNumber: '',
+      fieldOfStudy: '',
+      email: '',
+      level: '',
+      term: '',
+      year: '',
+      dean: '',
+    },
+    mainSubjects: [],
+    sideSubjects: [],
+  },
 };
 
 type SpzFormParams = {
   mode: 'create' | 'update';
-  id?: string;
-  title?: string;
-  info?: SpzInfo;
-  mainSubjects?: MainSubject[];
-  sideSubjects?: SideSubject[];
-  dateOfCreation?: number;
+  file?: File;
 };
 
-const SpzForm: React.FC<SpzFormParams> = ({
-  mode,
-  id,
-  title = '',
-  info = defaultInfo,
-  mainSubjects = [],
-  sideSubjects = [],
-  dateOfCreation = null,
-}) => {
-  const [spzTitle, setSpzTitle] = useState<string>(title);
+const SpzForm: React.FC<SpzFormParams> = ({ mode, file = defaultFile }) => {
+  const {
+    id,
+    title,
+    dateOfCreation,
+    form: { info, mainSubjects, sideSubjects },
+  } = file;
 
+  const [spzTitle, setSpzTitle] = useState<string>(title);
+  const [spzDean, setSpzDean] = useState<string>(info.dean);
   const [name, setName] = useState<string>(info.name);
   const [surname, setSurname] = useState<string>(info.surname);
   const [albumNumber, setAlbumNumber] = useState<string>(info.albumNumber);
@@ -65,14 +71,13 @@ const SpzForm: React.FC<SpzFormParams> = ({
   const [level, setLevel] = useState<string>(info.level);
   const [term, setTerm] = useState<string>(info.term);
   const [year, setYear] = useState<string>(info.year);
-
   const [errors, setErrors] = useState<ErrorObject>(null);
-
-  const [mainSubjectsArray, setMainSubjectsArray] =
-    useState<MainSubject[]>(mainSubjects);
-  const [sideSubjectsArray, setSideSubjectsArray] =
-    useState<SideSubject[]>(sideSubjects);
-
+  const [mainSubjectsArray, setMainSubjectsArray] = useState<MainSubject[]>(
+    mode === 'create' ? [] : mainSubjects
+  );
+  const [sideSubjectsArray, setSideSubjectsArray] = useState<SideSubject[]>(
+    mode === 'create' ? [] : sideSubjects
+  );
   const [mainSubjectsNumber, setMainSubjectsNumber] = useState<number>(
     mainSubjects.length
   );
@@ -257,7 +262,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
             onChange={(event) => handleMainChange(event, index, 'wclps')}
           />
           <input
-            type="text"
+            type="number"
             value={mainSubjectsArray[index]?.ects}
             placeholder="ects"
             onChange={(event) => handleMainChange(event, index, 'ects')}
@@ -286,7 +291,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
             onChange={(event) => handleSideChange(event, index, 'wclps')}
           />
           <input
-            type="text"
+            type="number"
             value={sideSubjectsArray[index]?.ects}
             placeholder="ects"
             onChange={(event) => handleSideChange(event, index, 'ects')}
@@ -319,6 +324,7 @@ const SpzForm: React.FC<SpzFormParams> = ({
           level,
           term,
           year,
+          dean: spzDean,
         },
         mainSubjects: mainSubjectsArray,
         sideSubjects: sideSubjectsArray,
@@ -357,8 +363,15 @@ const SpzForm: React.FC<SpzFormParams> = ({
         <input
           type="text"
           value={spzTitle}
-          className="file-name"
+          className="top-input"
           onChange={(event) => setSpzTitle(event.target.value)}
+        />
+        <p className="label">Dean</p>
+        <input
+          type="text"
+          value={spzDean}
+          className="top-input"
+          onChange={(event) => setSpzDean(event.target.value)}
         />
         <ul>{infoComponent}</ul>
       </div>

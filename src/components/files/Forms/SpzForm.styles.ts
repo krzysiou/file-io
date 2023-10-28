@@ -52,7 +52,7 @@ const SpzFormStyled = styled.div`
     }
   }
 
-  .file-name {
+  .top-input {
     margin: 0 auto;
     width: calc(100% - 10px);
     border: 1px solid ${colors.action};

@@ -11,7 +11,7 @@ const adjustMainArraySize = (array: MainSubject[], length: number) => {
       array.push({
         name: '',
         wclps: '',
-        ects: '',
+        ects: 0,
       });
     }
   } else if (array.length > length) {
@@ -27,7 +27,7 @@ const adjustSideArraySize = (array: SideSubject[], length: number) => {
       array.push({
         name: '',
         wclps: '',
-        ects: '',
+        ects: 0,
         faculty: '',
       });
     }
@@ -42,10 +42,15 @@ const replaceMainArrayElement = (
   index: number,
   array: MainSubject[],
   type: MainSubjectField,
-  value: string
+  value: string | number
 ) => {
   const newEntry = array[index];
-  newEntry[type] = value;
+
+  if (type === 'ects') {
+    newEntry[type] = value as number;
+  } else {
+    newEntry[type] = value as string;
+  }
 
   const newArray = [...array];
   newArray[index] = newEntry;
@@ -57,10 +62,15 @@ const replaceSideArrayElement = (
   index: number,
   array: SideSubject[],
   type: SideSubjectField,
-  value: string
+  value: string | number
 ) => {
   const newEntry = array[index];
-  newEntry[type] = value;
+
+  if (type === 'ects') {
+    newEntry[type] = value as number;
+  } else {
+    newEntry[type] = value as string;
+  }
 
   const newArray = [...array];
   newArray[index] = newEntry;

@@ -15,6 +15,7 @@ type SpzInfo = {
   level: string;
   term: string;
   year: string;
+  dean: string;
 };
 
 type MainSubjectField = 'name' | 'wclps' | 'ects';
@@ -22,7 +23,7 @@ type MainSubjectField = 'name' | 'wclps' | 'ects';
 type MainSubject = {
   name: string;
   wclps: string;
-  ects: string;
+  ects: number;
 };
 
 type SideSubjectField = 'name' | 'wclps' | 'ects' | 'faculty';
@@ -30,7 +31,7 @@ type SideSubjectField = 'name' | 'wclps' | 'ects' | 'faculty';
 type SideSubject = {
   name: string;
   wclps: string;
-  ects: string;
+  ects: number;
   faculty: string;
 };
 
