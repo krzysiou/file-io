@@ -1,11 +1,11 @@
 import { styled } from 'styled-components';
 
-import { styleVariables } from '../../../../public/styles/utils/styleVariables';
-import { mediaQuery } from '../../../../public/styles/utils/mediaQuery';
+import { styleVariables } from '../../../../../public/styles/utils/styleVariables';
+import { mediaQuery } from '../../../../../public/styles/utils/mediaQuery';
 
 const { colors } = styleVariables;
 
-const SpzFormStyled = styled.div`
+const PrzepisFormStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,44 +112,7 @@ const SpzFormStyled = styled.div`
     padding: 5px 5px;
   }
 
-  .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-
-    ${mediaQuery['web']} {
-      width: 100%;
-    }
-
-    div {
-      width: 100%;
-
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin: 10px 0;
-
-        > input {
-          width: calc(100% - 10px);
-          border: 1px solid ${colors.action};
-          border-radius: 5px;
-          padding: 5px 5px;
-          margin-bottom: 10px;
-
-          ${mediaQuery['web']} {
-            width: 30%;
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-  }
-
-  .side {
+  .subjects {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -186,4 +149,4 @@ const SpzFormStyled = styled.div`
   }
 `;
 
-export { SpzFormStyled };
+export { PrzepisFormStyled };

@@ -1,45 +1,16 @@
+import type { SpzForm } from './components/files/Spz/types';
+import type { WypisForm } from './components/files/Wypis/types';
+import type { PrzepisForm } from './components/files/Przepis/types';
+
+type FileType = 'spz' | 'wypis' | 'przepis';
+
+type Form = SpzForm | WypisForm | PrzepisForm;
+
 type Session = {
   id: string;
   accessToken: string;
   expire: number;
 };
-
-type FileType = 'spz' | 'status-studenta';
-
-type SpzInfo = {
-  name: string;
-  surname: string;
-  albumNumber: string;
-  fieldOfStudy: string;
-  email: string;
-  level: string;
-  term: string;
-  year: string;
-  dean: string;
-};
-
-type MainSubjectField = 'name' | 'wclps' | 'ects';
-
-type MainSubject = {
-  name: string;
-  wclps: string;
-  ects: number;
-};
-
-type SideSubjectField = 'name' | 'wclps' | 'ects' | 'faculty';
-
-type SideSubject = {
-  name: string;
-  wclps: string;
-  ects: number;
-  faculty: string;
-};
-
-interface SpzForm {
-  info: SpzInfo;
-  mainSubjects: MainSubject[];
-  sideSubjects: SideSubject[];
-}
 
 interface File {
   id: string;
@@ -47,7 +18,7 @@ interface File {
   type: FileType;
   dateOfCreation: number;
   dateOfUpdate: number;
-  form: SpzForm;
+  form: Form;
 }
 
 type User = {
@@ -69,11 +40,6 @@ export {
   type Session,
   type FileType,
   type File,
-  type MainSubject,
-  type SideSubject,
-  type MainSubjectField,
-  type SideSubjectField,
   type ErrorObject,
   type AuthErrorObject,
-  type SpzInfo,
 };

@@ -78,9 +78,27 @@ const replaceSideArrayElement = (
   return newArray;
 };
 
+const getTotalEcts = (subjects: MainSubject[]): number => {
+  return subjects.reduce(
+    (totalEcts, subject) => totalEcts + Number(subject.ects),
+    0
+  );
+};
+
+const getTotalHours = (subjects: MainSubject[]): number => {
+  return subjects.reduce((totalHours, subject) => {
+    const numbers = subject.wclps.split('/').map(Number);
+    const hours = numbers.reduce((hours, number) => hours + number, 0);
+
+    return totalHours + hours;
+  }, 0);
+};
+
 export {
   adjustMainArraySize,
   adjustSideArraySize,
   replaceMainArrayElement,
   replaceSideArrayElement,
+  getTotalEcts,
+  getTotalHours,
 };

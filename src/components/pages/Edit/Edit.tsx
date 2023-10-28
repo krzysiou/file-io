@@ -5,7 +5,10 @@ import React from 'react';
 import type { File } from '../../../types';
 
 import { EditStyled } from './Edit.styles';
-import { SpzForm } from '../../files/Forms/SpzForm';
+import { SpzForm } from '../../files/Spz/Form/SpzForm';
+import { WypisForm } from '../../files/Wypis/Form/WypisForm';
+import { PrzepisForm } from '../../files/Przepis/Form/PrzepisForm';
+
 type EditProps = {
   file: File;
 };
@@ -30,6 +33,15 @@ const getForm = (file: File) => {
     case 'spz': {
       return <SpzForm mode="update" file={file} />;
     }
+
+    case 'wypis': {
+      return <WypisForm mode="update" file={file} />;
+    }
+
+    case 'przepis': {
+      return <PrzepisForm mode="update" file={file} />;
+    }
+
     default: {
       return null;
     }

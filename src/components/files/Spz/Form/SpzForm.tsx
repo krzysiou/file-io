@@ -4,24 +4,24 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+import type { ErrorObject, File } from '../../../../types';
 import type {
-  ErrorObject,
-  MainSubjectField,
-  SideSubjectField,
   MainSubject,
+  MainSubjectField,
   SideSubject,
-  File,
-} from '../../../types';
+  SideSubjectField,
+  SpzForm as SpzFormType,
+} from '../types';
 
+import { config } from '../../../../../config/config';
+import { useSession } from '../../../../hooks/use-session';
+import { SpzFormStyled } from './SpzForm.styles';
 import {
   adjustMainArraySize,
   adjustSideArraySize,
   replaceMainArrayElement,
   replaceSideArrayElement,
-} from '../../../utils';
-import { config } from '../../../../config/config';
-import { useSession } from '../../../hooks/use-session';
-import { SpzFormStyled } from './SpzForm.styles';
+} from '../utils';
 
 const { apiUrl } = config;
 
@@ -54,12 +54,8 @@ type SpzFormParams = {
 };
 
 const SpzForm: React.FC<SpzFormParams> = ({ mode, file = defaultFile }) => {
-  const {
-    id,
-    title,
-    dateOfCreation,
-    form: { info, mainSubjects, sideSubjects },
-  } = file;
+  const { id, title, dateOfCreation, form } = file;
+  const { info, mainSubjects, sideSubjects } = form as SpzFormType;
 
   const [spzTitle, setSpzTitle] = useState<string>(title);
   const [spzDean, setSpzDean] = useState<string>(info.dean);

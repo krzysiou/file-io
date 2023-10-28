@@ -2,48 +2,34 @@
 
 import React, { useEffect } from 'react';
 
-import type { File, MainSubject } from '../../../types';
+import type { File } from '../../../../types';
+import type { SpzForm } from '../types';
 
 import { SpzTemplateStyled } from './SpzTemplate.styles';
-
-const getTotalEcts = (subjects: MainSubject[]): number => {
-  return subjects.reduce(
-    (totalEcts, subject) => totalEcts + Number(subject.ects),
-    0
-  );
-};
-
-const getTotalHours = (subjects: MainSubject[]): number => {
-  return subjects.reduce((totalHours, subject) => {
-    const numbers = subject.wclps.split('/').map(Number);
-    const hours = numbers.reduce((hours, number) => hours + number, 0);
-
-    return totalHours + hours;
-  }, 0);
-};
-
+import { getTotalEcts, getTotalHours } from '../utils';
 type SpzTemplateProps = {
   file: File;
 };
 
 const SpzTemplate: React.FC<SpzTemplateProps> = ({ file }) => {
+  const { form } = file;
   const {
-    form: {
-      info: {
-        name,
-        surname,
-        albumNumber,
-        fieldOfStudy,
-        email,
-        level,
-        term,
-        year,
-        dean,
-      },
-      mainSubjects,
-      sideSubjects,
+    info: {
+      name,
+      surname,
+      albumNumber,
+      fieldOfStudy,
+      email,
+      level,
+      term,
+      year,
+      dean,
     },
-  } = file;
+    mainSubjects,
+    sideSubjects,
+  } = form as SpzForm;
+
+  useEffect(() => window.print(), []);
 
   const mainEcts: number = getTotalEcts(mainSubjects);
   const sideEcts: number = getTotalEcts(sideSubjects);
@@ -81,8 +67,6 @@ const SpzTemplate: React.FC<SpzTemplateProps> = ({ file }) => {
     </tr>
   ));
 
-  useEffect(() => window.print(), []);
-
   return (
     <SpzTemplateStyled>
       <div className="main-body">
@@ -117,8 +101,8 @@ const SpzTemplate: React.FC<SpzTemplateProps> = ({ file }) => {
             </p>
           </div>
         </div>
-        <div className="header">
-          <h3>Semestralny plan zajęć</h3>
+        <div className="hero">
+          <b>Semestralny plan zajęć</b>
         </div>
 
         <div className="tab">
@@ -139,24 +123,26 @@ const SpzTemplate: React.FC<SpzTemplateProps> = ({ file }) => {
           </table>
         </div>
 
-        <div className="tab">
-          <table>
-            <thead>
-              <tr>
-                <th className="tab-header" colSpan={4}>
-                  <b>Przedmioty obieralne</b>
-                </th>
-              </tr>
-              <tr>
-                <th className="lesser">Przedmiot</th>
-                <th className="lesser">Liczba W/C/L/P/S</th>
-                <th className="lesser">ECTS</th>
-                <th className="lesser">Wydział</th>
-              </tr>
-            </thead>
-            <tbody>{sideSubjectsComponent}</tbody>
-          </table>
-        </div>
+        {sideSubjects.length > 0 && (
+          <div className="tab">
+            <table>
+              <thead>
+                <tr>
+                  <th className="tab-header" colSpan={4}>
+                    <b>Przedmioty obieralne</b>
+                  </th>
+                </tr>
+                <tr>
+                  <th className="lesser">Przedmiot</th>
+                  <th className="lesser">Liczba W/C/L/P/S</th>
+                  <th className="lesser">ECTS</th>
+                  <th className="lesser">Wydział</th>
+                </tr>
+              </thead>
+              <tbody>{sideSubjectsComponent}</tbody>
+            </table>
+          </div>
+        )}
 
         <div className="sum">
           <p>

@@ -5,18 +5,9 @@ import React, { useState } from 'react';
 import type { FileType } from '../../../types';
 
 import { CreateStyled } from './Create.styles';
-import { SpzForm } from '../../files/Forms/SpzForm';
-
-const getForm = (fileType: FileType) => {
-  switch (fileType) {
-    case 'spz': {
-      return <SpzForm mode="create" />;
-    }
-    default: {
-      return null;
-    }
-  }
-};
+import { SpzForm } from '../../files/Spz/Form/SpzForm';
+import { WypisForm } from '../../files/Wypis/Form/WypisForm';
+import { PrzepisForm } from '../../files/Przepis/Form/PrzepisForm';
 
 const Create: React.FC = () => {
   const [fileType, setFileType] = useState<FileType>(null);
@@ -25,8 +16,12 @@ const Create: React.FC = () => {
     setFileType('spz');
   };
 
-  const handleStatusClick = () => {
-    setFileType('status-studenta');
+  const handleWypisClick = () => {
+    setFileType('wypis');
+  };
+
+  const handlePrzepisClick = () => {
+    setFileType('przepis');
   };
 
   const formComponent = getForm(fileType);
@@ -43,13 +38,36 @@ const Create: React.FC = () => {
         <button className="button" onClick={handleSpzClick}>
           Semestralny plan zajęć
         </button>
-        <button className="button" onClick={handleStatusClick}>
-          Status studenta
+        <button className="button" onClick={handleWypisClick}>
+          Wypis ze studiów
+        </button>
+        <button className="button" onClick={handlePrzepisClick}>
+          Przepisanie oceny
         </button>
       </div>
       {formComponent}
     </CreateStyled>
   );
+};
+
+const getForm = (fileType: FileType) => {
+  switch (fileType) {
+    case 'spz': {
+      return <SpzForm mode="create" />;
+    }
+
+    case 'wypis': {
+      return <WypisForm mode="create" />;
+    }
+
+    case 'przepis': {
+      return <PrzepisForm mode="create" />;
+    }
+
+    default: {
+      return null;
+    }
+  }
 };
 
 export { Create };

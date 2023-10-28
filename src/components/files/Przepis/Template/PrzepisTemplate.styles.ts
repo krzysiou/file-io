@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-const SpzTemplateStyled = styled.div`
+const PrzepisTemplateStyled = styled.div`
   position: relative;
   font-family: 'Verdana', Times, serif;
   -webkit-font-smoothing: antialiased;
@@ -79,11 +79,13 @@ const SpzTemplateStyled = styled.div`
 
   .message {
     margin-bottom: 50px;
+    line-height: 16px;
   }
 
-  .header {
+  .hero {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin: 40px;
+    text-align: center;
   }
 
   .tab {
@@ -114,31 +116,23 @@ const SpzTemplateStyled = styled.div`
     justify-content: flex-end;
   }
 
-  .left {
-    width: 50%;
-  }
-
-  .mid {
-    width: 40%;
-  }
-
-  .right {
-    width: 10%;
-  }
-
-  .left-additional {
-    width: 50%;
-  }
-
-  .mid-additional {
+  .sub-1 {
     width: 20%;
   }
 
-  .right-additional {
-    width: 10%;
+  .sub-2 {
+    width: 20%;
   }
 
-  .faculty {
+  .sub-3 {
+    width: 20%;
+  }
+
+  .sub-4 {
+    width: 20%;
+  }
+
+  .sub-5 {
     width: 20%;
   }
 
@@ -148,4 +142,4 @@ const SpzTemplateStyled = styled.div`
   }
 `;
 
-export { SpzTemplateStyled };
+export { PrzepisTemplateStyled };
