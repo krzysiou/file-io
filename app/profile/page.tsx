@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Profile } from '../../src/components/pages/Profile/Profile';
-import { getUserData } from '../../src/fetching/fetch-user-data';
+import { getUserFiles } from '../../src/fetching/fetch-user-files-data';
 
 export default async function Page() {
-  const user = await getUserData();
+  const files = await getUserFiles();
 
-  return <Profile user={user} />;
+  return <Profile files={files} />;
 }

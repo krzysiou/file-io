@@ -3,19 +3,17 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import type { User } from '../../../types';
+import type { File as FileType } from '../../../types';
 
 import { ProfileStyled } from './Profile.styles';
 import { File } from './File';
 import { PlusIcon } from '../../shared/Icons/PlusIcon';
 
 type ProfileProps = {
-  user: User;
+  files: FileType[];
 };
 
-const Profile: React.FC<ProfileProps> = ({ user }) => {
-  const { files } = user;
-
+const Profile: React.FC<ProfileProps> = ({ files }) => {
   const router = useRouter();
 
   useEffect(() => {
