@@ -25,8 +25,8 @@ const File: React.FC<FileProps> = ({ file }) => {
 
   const { id, title, dateOfCreation, dateOfUpdate } = file;
 
-  const createDateString = new Date(dateOfCreation).toDateString();
-  const updateDateString = new Date(dateOfUpdate).toDateString();
+  const createDateString = new Date(Number(dateOfCreation)).toDateString();
+  const updateDateString = new Date(Number(dateOfUpdate)).toDateString();
 
   const dateOfUpdateComponent = dateOfUpdate && (
     <p className="file-date">updated: {updateDateString}</p>
@@ -35,6 +35,7 @@ const File: React.FC<FileProps> = ({ file }) => {
   const handleEditClick = () => {
     router.push(`/profile/edit?id=${id}`);
   };
+
   const handleDownloadClick = () => {
     router.push(`/profile/download?id=${id}`);
   };
