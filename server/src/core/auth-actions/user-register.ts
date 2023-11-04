@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt';
+import { genSaltSync, hashSync } from 'bcrypt-nodejs';
 import { v4 as uuid } from 'uuid';
 
 import type { Request, Response } from 'express';
@@ -9,9 +9,16 @@ import { findUser } from '../../database/user/find-user';
 import { saveUser } from '../../database/user/save-user';
 
 const hashPassword = async (password: string): Promise<string> => {
-  const hashedPassword = await hash(password, 10);
+  try {
+    const salt = genSaltSync(10);
+    const hashedPassword = await hashSync(password, salt);
 
-  return hashedPassword;
+    return hashedPassword;
+  } catch (error) {
+    console.log(error);
+
+    return 'asd';
+  }
 };
 
 const userRegister = async (req: Request, res: Response) => {

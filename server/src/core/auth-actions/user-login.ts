@@ -1,4 +1,4 @@
-import { compare } from 'bcrypt';
+import { compareSync } from 'bcrypt-nodejs';
 
 import type { Request, Response } from 'express';
 
@@ -9,7 +9,7 @@ const validatePassword = async (
   password: string,
   validPassword: string
 ): Promise<boolean> => {
-  const passwordMatching = await compare(password, validPassword);
+  const passwordMatching = await compareSync(password, validPassword);
 
   return passwordMatching;
 };
