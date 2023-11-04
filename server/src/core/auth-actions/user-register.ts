@@ -9,16 +9,10 @@ import { findUser } from '../../database/user/find-user';
 import { saveUser } from '../../database/user/save-user';
 
 const hashPassword = async (password: string): Promise<string> => {
-  try {
-    const salt = genSaltSync(10);
-    const hashedPassword = await hashSync(password, salt);
+  const salt = genSaltSync(10);
+  const hashedPassword = await hashSync(password, salt);
 
-    return hashedPassword;
-  } catch (error) {
-    console.log(error);
-
-    return 'asd';
-  }
+  return hashedPassword;
 };
 
 const userRegister = async (req: Request, res: Response) => {
