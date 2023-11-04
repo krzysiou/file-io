@@ -11,10 +11,12 @@ import { initDBConnection } from './database/postgress-client';
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || '3100';
-const origin = process.env.ORIGIN || 'http://localhost:3000';
+const port = process.env.PORT || '8080';
+const origin = process.env.ORIGIN;
 
-app.use(cors({ origin, methods: ['GET', 'POST'] }));
+if (origin) {
+  app.use(cors({ origin, methods: ['GET', 'POST'] }));
+}
 
 initDBConnection();
 initRouter(app, port, bindings);
