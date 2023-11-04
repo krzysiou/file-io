@@ -7,7 +7,7 @@ import axios from 'axios';
 
 import type { Session } from '../types';
 
-import { config } from '../../config/config';
+import { config } from '../config/config';
 
 const { apiUrl, sessionCookieName } = config;
 

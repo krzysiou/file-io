@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import type { Session } from './src/hooks/use-session';
 
-import { config as appConfig } from './config/config';
+import { config as appConfig } from './src/config/config';
 
 const { sessionCookieName } = appConfig;
 

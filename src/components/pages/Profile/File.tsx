@@ -10,7 +10,7 @@ import { FileStyled } from './File.styles';
 import { DeleteIcon } from '../../shared/Icons/DeleteIcon';
 import { DownloadIcon } from '../../shared/Icons/DownloadIcon';
 import { EditIcon } from '../../shared/Icons/EditIcon';
-import { config } from '../../../../config/config';
+import { config } from '../../../config/config';
 import { useSession } from '../../../hooks/use-session';
 
 const { apiUrl } = config;

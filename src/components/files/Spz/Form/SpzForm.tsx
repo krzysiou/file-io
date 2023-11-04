@@ -13,7 +13,7 @@ import type {
   SpzForm as SpzFormType,
 } from '../types';
 
-import { config } from '../../../../../config/config';
+import { config } from '../../../../config/config';
 import { useSession } from '../../../../hooks/use-session';
 import { SpzFormStyled } from './SpzForm.styles';
 import {

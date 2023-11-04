@@ -11,7 +11,7 @@ import type {
   SubjectField,
 } from '../types';
 
-import { config } from '../../../../../config/config';
+import { config } from '../../../../config/config';
 import { useSession } from '../../../../hooks/use-session';
 import { PrzepisFormStyled } from './PrzepisForm.styles';
 import { adjustSubjectArraySize, replaceSubjectArrayElement } from '../utils';

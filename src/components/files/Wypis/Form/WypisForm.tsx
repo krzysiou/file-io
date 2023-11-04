@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import type { ErrorObject, File } from '../../../../types';
 import type { WypisForm as WypisFormType } from '../types';
 
-import { config } from '../../../../../config/config';
+import { config } from '../../../../config/config';
 import { useSession } from '../../../../hooks/use-session';
 import { WypisFormStyled } from './WypisForm.styles';
 
