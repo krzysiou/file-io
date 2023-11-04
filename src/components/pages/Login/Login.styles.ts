@@ -124,6 +124,7 @@ const LoginStyled = styled.div<LoginStyledProps>`
     border: none;
     border-radius: 20px;
     transition: 0.2s;
+    color: #000000;
 
     &:hover {
       background-color: ${colors.accentDark};
