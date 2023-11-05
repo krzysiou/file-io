@@ -25,6 +25,7 @@ export default function RootLayout({
   return (
     <>
       <head>
+        <title>file-io</title>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <html lang="en">
