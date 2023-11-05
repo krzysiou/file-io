@@ -1,6 +1,5 @@
 # file-io
 
-# SimpleZ
 Website developed to help my friends fill and send university related papers. It gathers data via many forms and creates a pdf file containing ready-to-send document. It heavily relies on react library with next.js framework. The idea came to me when at the end of second term me and many others students like me had to resend said papers many times before they were accepted by the dean.
 
 ## Technologies
